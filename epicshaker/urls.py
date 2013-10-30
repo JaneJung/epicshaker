@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+from epicshaker.controllers.tests import test
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -14,4 +16,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', test, name = 'test'),
 )
