@@ -1,5 +1,6 @@
 import json
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from epicshaker.models.menu import Beverage
 
@@ -34,5 +35,18 @@ def get_beverage(request):
         response_data[berg.key.id()] = data
 
     return HttpResponse(json.dumps(response_data, indent=2), content_type="application/json")
-    
+
+@csrf_exempt
+def add_beverage(request):
+
+    if request.method != 'POST':
+        return HttpResponse("should be post")
+
+    if 'name' in request.POST and 'recipe' in request.POST:
+        berg = Beverage(name = request.POST['name'],
+                        recipe = json.loads(request.POST['recipe']))
+
+    berg.put()
+    return HttpResponse("completed")
+
 

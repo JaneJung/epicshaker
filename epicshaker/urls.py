@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from epicshaker.controllers.beverages import list_beverages, get_beverage
+from epicshaker.controllers.beverages import list_beverages, get_beverage, add_beverage
 from epicshaker.controllers.tests import test
 
 # Uncomment the next two lines to enable the admin:
@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^test/', test, name='test'),
     url(r'^$', list_beverages, name = 'list_beverages'),
     url(r'^recipe/', get_beverage, name = 'get_beverage'),
+    url(r'^addrecipe/', add_beverage, name='add_beverage'),
 )
