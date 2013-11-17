@@ -13,10 +13,10 @@
         android:text="음료 창작 페이지"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp" >
 
@@ -28,26 +28,26 @@
             android:layout_marginRight="90dp"
             android:background="@drawable/cupborder" >
         </View>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="34dp"
-        android:text="제작 완료" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/layout1"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="34dp"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="63dp"
         android:text="재료 선택" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="68dp"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="제작 완료" />
 
 </RelativeLayout>

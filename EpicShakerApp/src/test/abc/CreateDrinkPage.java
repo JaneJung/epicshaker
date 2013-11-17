@@ -8,6 +8,7 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
@@ -38,20 +39,21 @@ public class CreateDrinkPage extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.createdrinkpage);
 		//LinearLayout lay1 = (LinearLayout)findViewById(R.id.layout1);
-		waterColor = Color.GREEN;
-		curWaterLevel = 0;
-		updateWaterLevel(0.5f);
-		/*
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		waterColor = Color.RED;
-		curWaterLevel = 100;
-		updateWaterLevel(1f);
+		
+		RelativeLayout lay1 = (RelativeLayout)findViewById(R.id.layout1);
+		View waterView= new View(this);
+		waterView.setBackgroundColor(Color.BLACK);
+		waterView.setLayoutParams(new LayoutParams(200, 400));
+		lay1.addView(waterView);
+		
+		
+		Button btn1=(Button)findViewById(R.id.button1);
+		btn1.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
+				startActivity(intetn1);
+			}
+		});
 		/*
 		View waterView= new View(this);
 		waterView.setBackgroundColor(Color.YELLOW);
@@ -94,7 +96,7 @@ public class CreateDrinkPage extends Activity {
 		//waterView.setPivotY(400);
 		waterView.setPivotY(cupHeight-curWaterLevel);
 		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(waterView, View.SCALE_Y,
-				0,level);
+				0,1f);
 		imageAnimator.setDuration(1000);
 		imageAnimator.start();
 	} 
