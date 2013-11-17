@@ -43,10 +43,8 @@
         </activity>
         <activity android:name="test.abc.MyCreateDrinkPage" >
         </activity>
-        <activity android:name="test.abc.PreMakePage" >
-        </activity>
         <activity
-            android:name="test.abc.MaterialListPage">
+            android:name="test.abc.PreMakePage" >
         </activity>
     </application>
 

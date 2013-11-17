@@ -8,12 +8,15 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.Intent;
 
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -29,74 +32,61 @@ public class CreateDrinkPage extends Activity {
 	/** Called when the activity is first created. */
 
 	int waterColor;
-	float curWaterLevel=0;
-	final int cupBottom=113;
-	final int cupHeight=400;
+	int curWaterLevel=0;
+	final int cupHeight=300;
 	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.createdrinkpage);
-		//LinearLayout lay1 = (LinearLayout)findViewById(R.id.layout1);
-		
-		RelativeLayout lay1 = (RelativeLayout)findViewById(R.id.layout1);
-		View waterView= new View(this);
-		waterView.setBackgroundColor(Color.BLACK);
-		waterView.setLayoutParams(new LayoutParams(200, 400));
-		lay1.addView(waterView);
-		
-		
-		Button btn1=(Button)findViewById(R.id.button1);
-		btn1.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
-				startActivity(intetn1);
-			}
-		});
-		/*
-		View waterView= new View(this);
-		waterView.setBackgroundColor(Color.YELLOW);
-		waterView.setX(227);
-		// waterView.setRight(120);
-		waterView.setY(113);
-		waterView.setAlpha(0.8f);
-		waterView.setLayoutParams(new LayoutParams(200, 400));
 
-		lay1.addView(waterView);
-
-		waterView.setPivotY(400);
-		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(waterView, View.SCALE_Y,
-				1f,0);
-		imageAnimator.setDuration(5000);
-		imageAnimator.start();
-*/
-		//setContentView(waterView);
+		calculateWaterLevel(100);
+		calculateWaterLevel(200);
+		calculateWaterLevel(250);
 
 
 	}
 	
-	public void finishMaterial () {
-		
+	public void calculateWaterLevel (int waterLevel) {
+		curWaterLevel = waterLevel;
+		float level = curWaterLevel/(float)cupHeight;
+		// if level > 1 => error
+		if (level > 0.8f)
+			waterColor = Color.YELLOW;
+		else if (level > 0.5f ) {// to change water color
+			waterColor = Color.RED;
+		} else {
+			waterColor = Color.GREEN;
+		}
+		updateWaterLevel(level);
 	}
 	
+	private int getPixels(int dipValue){ 
+	     Resources r = getResources();
+	     int px = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue,   r.getDisplayMetrics());
+	     return px; 
+	}
 
 	public void updateWaterLevel (float level) {
 		RelativeLayout lay1 = (RelativeLayout)findViewById(R.id.layout1);
+		
+		
 		View waterView= new View(this);
+		int width = 720 - getPixels(184);
+		Log.d("width", Integer.toString(width));
+		int height = getPixels(cupHeight);
+		waterView.setX((float)getPixels(92));
 		waterView.setBackgroundColor(waterColor);
-		waterView.setX(227);
-		// waterView.setRight(120);
-		waterView.setY(cupBottom);
 		waterView.setAlpha(0.8f);
-		waterView.setLayoutParams(new LayoutParams(200, 400));
+		waterView.setLayoutParams(new LayoutParams(width, height-4));
 
 		lay1.addView(waterView);
 
 		//waterView.setPivotY(400);
-		waterView.setPivotY(cupHeight-curWaterLevel);
+		waterView.setPivotY(height-4);
 		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(waterView, View.SCALE_Y,
-				0,1f);
+				0,level);
 		imageAnimator.setDuration(1000);
 		imageAnimator.start();
 	} 
