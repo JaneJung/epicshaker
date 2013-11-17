@@ -9,8 +9,10 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 
+import android.graphics.Color;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -19,6 +21,7 @@ import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
  
 public class CreateDrinkPage extends Activity {
     /** Called when the activity is first created. */
@@ -26,35 +29,27 @@ public class CreateDrinkPage extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.createdrinkpage);
-      
+        LinearLayout lay1 = (LinearLayout)findViewById(R.id.layout1);
+               
         View waterView= new View(this);
-        waterView.setLeft(0);
-        waterView.setTop(40);
-        waterView.setPivotY(200);
+        waterView.setBackgroundColor(Color.YELLOW);
+        waterView.setX(227);
+       // waterView.setRight(120);
+        waterView.setY(113);
+        waterView.setAlpha(0.8f);
+        waterView.setLayoutParams(new LayoutParams(200, 400));
+        
+        lay1.addView(waterView);
+        
+        waterView.setPivotY(400);
         ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(waterView, View.SCALE_Y,
-                0,1f );
-	    imageAnimator.setDuration(1000);
+                1f,0);
+	    imageAnimator.setDuration(3000);
 	    imageAnimator.start();
+	    
 	    //setContentView(waterView);
         
-        /*
-        ImageView iv = (ImageView)findViewById(R.id.imageView1);
-        ResizeAnimation ra = new ResizeAnimation(iv, 100, 100, 500, 500);
-
-        Transformation t = new Transformation();
-        ra.applyTransformation(1000, t);
-        /*
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.test02);
-        Bitmap resized = Bitmap.createScaledBitmap(image, 450, 200, true);
-        iv.setImageBitmap(resized);
-        iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE); // 레이아웃 크기에 이미지를 맞춘다
-        iv.setPadding(3, 3, 3, 3);
-        iv.setOnClickListener(new OnClickListener(){
-            public void onClick(View arg0) {
-                finish();
-            }
-        });
-        */
+    
     }
     
     public void connectArduino() throws IOException{

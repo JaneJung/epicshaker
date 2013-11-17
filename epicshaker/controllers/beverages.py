@@ -10,6 +10,8 @@ def list_beverages(request):
     for berg in bergs:
         data = {}
         data['name'] = berg.name
+        data['description'] = berg.description
+        data['image'] = berg.image
         data['recipe'] = berg.recipe
         data['tags'] = berg.tags
         response_data[berg.key.id()] = data
@@ -30,6 +32,8 @@ def get_beverage(request):
     for berg in bergs:
         data = {}
         data['name'] = berg.name
+        data['description'] = berg.description
+        data['image'] = berg.image
         data['recipe'] = berg.recipe
         data['tags'] = berg.tags
         response_data[berg.key.id()] = data
