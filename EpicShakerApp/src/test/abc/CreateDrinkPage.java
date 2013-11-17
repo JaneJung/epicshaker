@@ -44,7 +44,7 @@ public class CreateDrinkPage extends Activity {
         waterView.setPivotY(400);
         ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(waterView, View.SCALE_Y,
                 1f,0);
-	    imageAnimator.setDuration(3000);
+	    imageAnimator.setDuration(5000);
 	    imageAnimator.start();
 	    
 	    //setContentView(waterView);
