@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    
+     android:background="@drawable/background1"
     android:layout_height="match_parent" >
 
     <TextView
@@ -11,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp"
         android:text="내가 만들었던 음료 목록"
+         style="@style/TitleFont"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
