@@ -1,35 +1,21 @@
 package test.abc;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.util.EntityUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Entity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
-import android.renderscript.RenderScript.RSErrorHandler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,19 +39,18 @@ public class DrinkNameSearchPage extends Activity   {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		String theJsonString = null; 
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drinknamesearchpage);
-
-		
+		Method setListMethod;
+		Class[] parameterTypes = new Class[1];
+        parameterTypes[0] = String.class;
 		try {
-			new httpRequestGet().execute("http://epicshakerprj.appspot.com/");
-			
-		
-		} catch (Exception e1) {
-			Log.d("epic","error");
+			setListMethod = DrinkNameSearchPage.class.getMethod("setListData", parameterTypes);
+			new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/");
+		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		
@@ -122,59 +107,7 @@ public class DrinkNameSearchPage extends Activity   {
 	}
 	
 	
-	private class httpRequestGet extends AsyncTask<String, Void, String>{
-		String jsonStr = null;
-	      @Override
-	      protected String doInBackground(String... urls) {
-	           
-	          HttpResponse response = null;
-	          HttpClient client = new DefaultHttpClient();
-	          HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
-	          HttpGet httpGet = new HttpGet(urls[0]);
-	          try {
-	              response = client.execute(httpGet);
-	              HttpEntity resEntity = response.getEntity();
-
-	              jsonStr = EntityUtils.toString(resEntity);
-
-	          }
-	          catch(IOException e) {
-	              e.printStackTrace();
-	          }
-	          return jsonStr;
-	      }
-	 
-	    
-	        @Override
-	      protected void onPostExecute(String result) {
-	          //super.onPostExecute(result);     
-	          try {
-	        	  //Log.d("epic",result);
-	        	  setListData(result);
-	          } catch (IllegalStateException e) {
-	              e.printStackTrace();
-	          }
-	      }
-	      
-	  }
-	/*
-	private String httpRequestGet(String url) throws Exception {
-		String jsonStr = null;
-		Log.d("epic",url);
-		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(url);
-		Log.d("epic","1");
-		HttpResponse response = client.execute(get);
-		Log.d("epic","2");
-		StatusLine statusLine = response.getStatusLine();
-		Log.d("epic",statusLine.toString());
-		HttpEntity resEntity = response.getEntity();
-		jsonStr = EntityUtils.toString(resEntity);
-		return jsonStr;
-	}
-*/
-
-	private class DataAdapter extends ArrayAdapter<CData> {
+	public class DataAdapter extends ArrayAdapter<CData> {
 		// 레이아웃 XML을 읽어들이기 위한 객체
 		private LayoutInflater mInflater;
 

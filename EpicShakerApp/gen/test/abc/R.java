@@ -21,9 +21,11 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int cupborder=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int skaqkrtk_1285=0x7f020002;
+        public static final int background1=0x7f020000;
+        public static final int buttonstyle=0x7f020001;
+        public static final int cupborder=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int skaqkrtk_1285=0x7f020004;
     }
     public static final class id {
         public static final int EditText01=0x7f090009;
@@ -53,9 +55,8 @@ public final class R {
         public static final int drinkmakepage=0x7f030006;
         public static final int drinknamesearchpage=0x7f030007;
         public static final int drinksearchpage=0x7f030008;
-        public static final int makedrinkpage=0x7f030009;
-        public static final int materiallistpage=0x7f03000a;
-        public static final int premakepage=0x7f03000b;
+        public static final int materiallistpage=0x7f030009;
+        public static final int premakepage=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -96,6 +97,7 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int TitleFont=0x7f070002;
     }
     public static final class xml {
         public static final int device_filter=0x7f040000;

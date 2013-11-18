@@ -41,10 +41,19 @@ public class CreateDrinkPage extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.createdrinkpage);
 
+		
+		
 		calculateWaterLevel(100);
 		calculateWaterLevel(200);
 		calculateWaterLevel(250);
-
+		Button btn1=(Button)findViewById(R.id.button1);
+		
+		btn1.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
+				startActivity(intetn1);
+			}
+		});
 
 	}
 	
