@@ -59,7 +59,6 @@ public class HttpGetJson {
 	      protected void onPostExecute(String result) {
 	          //super.onPostExecute(result);     
 	          try {
-	        	  Log.d("epic",result);
 	        	  method.invoke(methodThis, result);
 	        	 // method.invoke(method, "");
 	          } catch (IllegalStateException e) {
