@@ -41,6 +41,7 @@
         android:layout_alignBottom="@+id/button2"
         android:layout_alignParentRight="true"
         android:layout_marginRight="63dp"
+        android:background="@drawable/buttonstyle"
         android:text="재료 선택" />
 
     <Button
@@ -51,6 +52,7 @@
         android:layout_marginRight="31dp"
         android:layout_marginTop="32dp"
         android:layout_toLeftOf="@+id/button1"
+        android:background="@drawable/buttonstyle"
         android:text="제작 완료" />
 
 </RelativeLayout>

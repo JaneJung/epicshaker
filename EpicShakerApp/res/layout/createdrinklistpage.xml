@@ -23,6 +23,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
+        android:background="@drawable/buttonstyle"
         android:text="음료 창작" />
 
     <ListView

@@ -16,6 +16,7 @@
         android:layout_alignLeft="@+id/button3"
         android:layout_alignRight="@+id/button2"
         android:layout_marginTop="189dp"
+        android:background="@drawable/buttonstyle"
         android:text="내 음료 제작" />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_alignRight="@+id/button3"
         android:layout_below="@+id/button1"
         android:layout_marginTop="14dp"
+        android:background="@drawable/buttonstyle"
         android:text="음료 검색" />
 
     <Button
@@ -35,6 +37,7 @@
         android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
+        android:background="@drawable/buttonstyle"
         android:text="최근 제작 음료" />
 
     <TextView
