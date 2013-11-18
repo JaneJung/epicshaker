@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Abc</string>
+    <string name="app_name">Epic Shaker</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_pre_make_page">PreMakePage</string>
+    <string name="title_activity_material_list_page">MaterialListPage</string>
 
 </resources>
