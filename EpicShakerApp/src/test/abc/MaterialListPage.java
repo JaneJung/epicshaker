@@ -25,12 +25,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
+import android.widget.SearchView;
 
 public class MaterialListPage extends Activity {
 
-	private ListView listview;
-
+	public ListView listview;
+	public SearchView searchView;
 	// 데이터를 연결할 Adapter
 	DataAdapter  adapter;
 
@@ -39,40 +41,73 @@ public class MaterialListPage extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.materiallistpage);
 		listview = (ListView) findViewById(R.id.listView1);
 		OnItemClickListener listViewClickListener = new OnItemClickListener()
 		{
-		    public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
-		    {
-		    	sendDataToCreateDrink();
-		    	Intent intetn1 = new Intent(MaterialListPage.this , CreateDrinkPage.class);
+			public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
+			{
+				sendDataToCreateDrink();
+				Intent intetn1 = new Intent(MaterialListPage.this , CreateDrinkPage.class);
 				startActivity(intetn1);
-		    }
+			}
 
-			
+
 		};
 		listview.setOnItemClickListener(listViewClickListener);
-		
-		
-		Method setListMethod;
-		Class[] parameterTypes = new Class[1];
-        parameterTypes[0] = String.class;
+
+
+		Log.d("epic","1");
+
 		try {
+			Method setListMethod;
+			Class[] parameterTypes = new Class[1];
+			parameterTypes[0] = String.class;
 			setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
-			new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredients/");
+			new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredientlist/");
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		setListMethod.
-		
+		//		setListMethod.
+		Log.d("epic","2");
+		searchView = (SearchView) findViewById(R.id.editText1);
+		Log.d("epic","3");
+		OnQueryTextListener searchViewQueryListner = new SearchView.OnQueryTextListener( ) {
+			@Override
+			public boolean onQueryTextChange( String newText ) {
+				Method setListMethod;
+				try {
+					Log.d("epic",newText);
+					Class[] parameterTypes = new Class[1];
+					parameterTypes[0] = String.class;
+					setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
+					new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredient/?name="+newText);
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return false;
+			}
+
+			@Override
+			public boolean   onQueryTextSubmit(String query) {
+				Log.d("epic",query);
+				//searchView.setText(query);
+				return false;
+			}
+		};
+		Log.d("epic","setSearch");
+		searchView.setOnQueryTextListener(searchViewQueryListner);
+
 	}
-	
+
+
 	public void sendDataToCreateDrink() {
-		
+
 	}
 
 	public void setListData(String json) {
