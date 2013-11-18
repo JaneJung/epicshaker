@@ -15,19 +15,24 @@ import test.abc.DrinkNameSearchPage.DataAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
+import android.widget.SearchView;
 
 public class MaterialListPage extends Activity {
 
-	private ListView listview;
-
+	public ListView listview;
+	public SearchView searchView;
 	// 데이터를 연결할 Adapter
 	DataAdapter  adapter;
 
@@ -36,27 +41,77 @@ public class MaterialListPage extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		String theJsonString; 
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.materiallistpage);
-		Method setListMethod;
-		Class[] parameterTypes = new Class[1];
-        parameterTypes[0] = String.class;
+		listview = (ListView) findViewById(R.id.listView1);
+		OnItemClickListener listViewClickListener = new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
+			{
+				sendDataToCreateDrink();
+				Intent intetn1 = new Intent(MaterialListPage.this , CreateDrinkPage.class);
+				startActivity(intetn1);
+			}
+
+
+		};
+		listview.setOnItemClickListener(listViewClickListener);
+
+
+		Log.d("epic","1");
+
 		try {
+			Method setListMethod;
+			Class[] parameterTypes = new Class[1];
+			parameterTypes[0] = String.class;
 			setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
-			new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredients/");
+			new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredientlist/");
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		setListMethod.
-		
+		//		setListMethod.
+		Log.d("epic","2");
+		searchView = (SearchView) findViewById(R.id.editText1);
+		Log.d("epic","3");
+		OnQueryTextListener searchViewQueryListner = new SearchView.OnQueryTextListener( ) {
+			@Override
+			public boolean onQueryTextChange( String newText ) {
+				Method setListMethod;
+				try {
+					Log.d("epic",newText);
+					Class[] parameterTypes = new Class[1];
+					parameterTypes[0] = String.class;
+					setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
+					new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredient/?name="+newText);
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return false;
+			}
+
+			@Override
+			public boolean   onQueryTextSubmit(String query) {
+				Log.d("epic",query);
+				//searchView.setText(query);
+				return false;
+			}
+		};
+		Log.d("epic","setSearch");
+		searchView.setOnQueryTextListener(searchViewQueryListner);
+
+	}
+
+
+	public void sendDataToCreateDrink() {
+
 	}
 
 	public void setListData(String json) {
 		//theJsonString = new String(" {\"5668600916475904\": {\"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/02/85/28581.jpg\",       \"tags\": [         \"cool\"       ],       \"recipe\": {         \"vodka\": 21,         \"pineapple juice\": 28,         \"coconut rum\": 28       },       \"name\": \"Bikini Martini\",       \"description\": \"An awesome drink to sip by the pool! Garnish with an orange wheel.\"     },     \"5649050225344512\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/03/46/34689.jpg\",       \"tags\": [         \"sweet\"       ],       \"recipe\": {         \"gin\": 42,         \"vodca\": 56       },       \"name\": \"Dan Fay Martini\",       \"description\": \"My father believes in a condition called 'the gin meanies.' He invented this cocktail to satisfy his taste for gin, while allowing him to slightly dilute its effects with vodka. His passion for this concoction quickly spread to my friends, who have been known to throw parties solely to celebrate him and his martini.\"     },     \"5750085036015616\": {       \"image\": null,       \"tags\": [],       \"recipe\": {         \"tequila\": 170,         \"triple sec\": 56,         \"frozen sliced strawberries\": 226       },       \"name\": \"epicshaker\",       \"description\": null     },     \"5178081291534336\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/23/47/234705.jpg\",       \"tags\": [         \"sweet\",         \"cool\"       ],       \"recipe\": {         \"tequila\": 170,         \"triple sec\": 56,         \"frozen sliced strawberries\": 226       },       \"name\": \"Ultimate Frozen Strawberry Margarita\",       \"description\": \"A near perfect strawberry margarita with frozen strawberries and limeade concentrate.\"     },     \"5741031244955648\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/39/74/397413.jpg\",       \"tags\": [         \"sweet\"       ],       \"recipe\": {         \"tequila\": 141,         \"fresh lime juice\": 85,         \"triple sec\": 85,         \"sweetened lime juice\": 28       },       \"name\": \"Parker's Famous Margaritas\",       \"description\": \"This is the signature drink at my in-law's home. My father-in-law developed a taste for margaritas made from scratch during the summer they spent in Zihuatanejo during the 1960s. After decades of tinkering he has arrived at this foolproof recipe for the ultimate Mexican cocktail.\"     },     \"5724160613416960\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/64/75/647594.jpg\",       \"tags\": [         \"sweet\",         \"cool\"       ],       \"recipe\": {         \"coconut milk\": 28,         \"pineapple juice\": 28,         \"rum\": 14       },       \"name\": \"Pina Colada III\",       \"description\": \"A simple run-of-the-mill pina colada drink.\"     }   }");
-		Log.d("epic", "dsgswdgsdgds");
 
 		String theJsonString = json;
 

@@ -47,7 +47,7 @@ public class DrinkNameSearchPage extends Activity   {
         parameterTypes[0] = String.class;
 		try {
 			setListMethod = DrinkNameSearchPage.class.getMethod("setListData", parameterTypes);
-			new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/");
+			new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/recipelist/");
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

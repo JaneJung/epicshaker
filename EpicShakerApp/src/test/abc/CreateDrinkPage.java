@@ -1,6 +1,7 @@
 package test.abc;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
@@ -54,8 +55,32 @@ public class CreateDrinkPage extends Activity {
 				startActivity(intetn1);
 			}
 		});
+		Button btn2=(Button)findViewById(R.id.button2);
+		btn2.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				Method complete;
+				Class[] parameterTypes = new Class[0];
+		        try {
+					complete = CreateDrinkPage.class.getMethod("complete", parameterTypes);
+					AlertObject altobj = new AlertObject(complete,CreateDrinkPage.this);
+					altobj.showAlert("제작이 완료되었습니다.");
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			
+			}
+		});
 
 	}
+	
+	public void complete() {
+		Intent intetn1 = new Intent(CreateDrinkPage.this , MainActivity.class);
+		startActivity(intetn1);
+	}
+	
 	
 	public void calculateWaterLevel (int waterLevel) {
 		curWaterLevel = waterLevel;
