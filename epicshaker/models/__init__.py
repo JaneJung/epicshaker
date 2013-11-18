@@ -1,2 +1,2 @@
 from menu import Beverage
-from ingredients import Ingredient
+from ingredient import Ingredient
