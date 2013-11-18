@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, include, url
 
 from epicshaker.controllers.beverages import list_beverages, get_beverage, add_beverage
-from epicshaker.controllers.ingredients import list_ingredients
-from epicshaker.controllers.tests import test, test2
+from epicshaker.controllers.ingredients import list_ingredients, get_ingredient
+from epicshaker.controllers.posts import add_post, get_post
+
+from epicshaker.controllers.tests import test, test2, test3, test4
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -21,8 +23,16 @@ urlpatterns = patterns('',
 
     url(r'^test/', test, name='test'),
     url(r'^intest/', test2, name='test2'),
-    url(r'^$', list_beverages, name = 'list_beverages'),
+    url(r'^imagetest/', test3, name='test3'),
+    url(r'^querytest/', test4, name='test4'),
+
+    url(r'^recipelist/$', list_beverages, name = 'list_beverages'),
     url(r'^recipe/', get_beverage, name = 'get_beverage'),
     url(r'^addrecipe/', add_beverage, name='add_beverage'),
-    url(r'^ingredients/', list_ingredients, name = 'list_ingredients'),
+
+    url(r'^ingredientlist/', list_ingredients, name = 'list_ingredients'),
+    url(r'^ingredient/', get_ingredient, name = 'get_ingredient'),
+
+    url(r'^addpost/', add_post, name = 'add_post'),
+    url(r'^getpost/', get_post, name = 'get_post'),
 )
