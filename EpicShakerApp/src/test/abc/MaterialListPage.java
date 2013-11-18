@@ -50,8 +50,7 @@ public class MaterialListPage extends Activity {
 			public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
 			{
 				sendDataToCreateDrink();
-				Intent intetn1 = new Intent(MaterialListPage.this , CreateDrinkPage.class);
-				startActivity(intetn1);
+				MaterialListPage.this.finish(); 
 			}
 
 

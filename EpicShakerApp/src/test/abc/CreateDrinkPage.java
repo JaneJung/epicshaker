@@ -35,7 +35,7 @@ public class CreateDrinkPage extends Activity {
 	int waterColor;
 	int curWaterLevel=0;
 	final int cupHeight=300;
-	
+	int middleTest=0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,14 @@ public class CreateDrinkPage extends Activity {
 		
 		
 		calculateWaterLevel(100);
-		calculateWaterLevel(200);
-		calculateWaterLevel(250);
+		
+		//calculateWaterLevel(250);
 		Button btn1=(Button)findViewById(R.id.button1);
 		
 		btn1.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
+				
 				startActivity(intetn1);
 			}
 		});
@@ -74,6 +75,25 @@ public class CreateDrinkPage extends Activity {
 			}
 		});
 
+	}
+	
+	
+	@Override
+	public void onStop() {
+	    super.onStop();  // Always call the superclass method first
+	    middleTest++;
+	   
+	}
+	
+	
+	@Override
+	public void onRestart() {
+	    super.onRestart();  // Always call the superclass method first
+	    if(middleTest == 1) {
+	    	calculateWaterLevel(200);
+	    } else if(middleTest == 2) {
+	    	calculateWaterLevel(250);
+	    }
 	}
 	
 	public void complete() {
@@ -112,7 +132,7 @@ public class CreateDrinkPage extends Activity {
 		int height = getPixels(cupHeight);
 		waterView.setX((float)getPixels(92));
 		waterView.setBackgroundColor(waterColor);
-		waterView.setAlpha(0.8f);
+		waterView.setAlpha(0.4f);
 		waterView.setLayoutParams(new LayoutParams(width, height-4));
 
 		lay1.addView(waterView);
