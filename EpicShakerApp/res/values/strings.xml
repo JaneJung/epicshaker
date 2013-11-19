@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_pre_make_page">PreMakePage</string>
     <string name="title_activity_material_list_page">MaterialListPage</string>
+    <string name="title_activity_drink_info_page">DrinkInfoPage</string>
+    <string name="title_activity_input_drink_info_page">InputDrinkInfoPage</string>
 
 </resources>

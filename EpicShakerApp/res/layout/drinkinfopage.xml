@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".DrinkInfoPage" >
+
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/TitleFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="음료 정보 페이지"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="24dp"
+        android:text="Bikini Martini"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="이름:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android1:id="@+id/relativeLayout1"
+        android1:layout_width="match_parent"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/textView3"
+        android1:layout_marginTop="48dp"
+        android1:orientation="vertical" >
+
+        <TextView
+            android1:id="@+id/textView5"
+            style="@style/TextStyle"
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:text="It is good" />
+
+        <TextView
+            android1:id="@+id/textView4"
+            style="@style/TextStyle"
+            android1:layout_width="match_parent"
+            android1:layout_height="wrap_content"
+            android1:text="Very Good" />
+    </RelativeLayout>
+
+    <TextView
+        android1:id="@+id/textView6"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_centerHorizontal="true"
+        android1:layout_centerVertical="true"
+        style="@style/TextStyle"
+        android1:text="댓글 목록"
+        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android1:id="@+id/imageView1"
+        android1:layout_width="60dp"
+        android1:layout_height="60dp"
+        android1:layout_below="@+id/textView1"
+        android1:layout_centerHorizontal="true"
+        android1:layout_marginTop="25dp"
+        android1:src="@drawable/bm" />
+
+</RelativeLayout>
