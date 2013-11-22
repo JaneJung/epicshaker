@@ -49,8 +49,11 @@ public class PreMakePage extends Activity {
     private void updateReceivedData(byte[] data) {
         String[] arr=HexDump.dumpHexString(data).split(" ");
         String a=arr[arr.length-1];
-    	final String message = a.substring(0,a.length()-1)+"\n";
-        textView.setText(message);
+    	String message = a.substring(0,a.length()-1);
+    	message = message.trim();
+    	//message = "3AB";
+    	int parseInt = Integer.parseInt(message, 16);
+        textView.setText(Integer.toString(parseInt));
     }
 
     
