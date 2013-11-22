@@ -16,7 +16,7 @@ public class CreateDrinkListPage extends Activity {
 		Button btn1=(Button)findViewById(R.id.button1);
 		btn1.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intetn2 = new Intent(CreateDrinkListPage.this , InputDrinkInfoPage.class);
+				Intent intetn2 = new Intent(CreateDrinkListPage.this , PreMakePage.class);
 				startActivity(intetn2);
 			}
 		});
