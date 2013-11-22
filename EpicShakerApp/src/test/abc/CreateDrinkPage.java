@@ -36,7 +36,7 @@ public class CreateDrinkPage extends Activity {
 	int curWaterLevel=0;
 	final int cupHeight=300;
 	int middleTest=0;
-	
+	static int MetrailActivityCode=0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,8 +52,9 @@ public class CreateDrinkPage extends Activity {
 		btn1.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
-				
-				startActivity(intetn1);
+				//intetn1.putExtra("Name", Value);
+				startActivityForResult(intetn1,MetrailActivityCode);
+				//startActivity(intetn1);
 			}
 		});
 		Button btn2=(Button)findViewById(R.id.button2);
@@ -83,6 +84,16 @@ public class CreateDrinkPage extends Activity {
 	    super.onStop();  // Always call the superclass method first
 	    middleTest++;
 	   
+	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == MetrailActivityCode && resultCode == Activity.RESULT_OK) {
+	        String metrialName = data.getStringExtra("name");
+	        Log.d("epic",metrialName);
+	        // do something with B's return values
+	    }
 	}
 	
 	
