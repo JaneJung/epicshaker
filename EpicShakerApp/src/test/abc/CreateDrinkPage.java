@@ -38,11 +38,10 @@ public class CreateDrinkPage extends Activity {
 	String drinkName;
 	String des;
 	String tag;
-	int waterColor;
+	int waterColor=0;
 	int curWaterLevel=0;
 	int cupHeight=300;
 	int colorArr[];
-	int middleTest=0;
 	int curWeight = 0;
 	HttpFormPost formPost;
 	View curView;
@@ -163,7 +162,7 @@ public class CreateDrinkPage extends Activity {
 	@Override
 	public void onStop() {
 	    super.onStop();  // Always call the superclass method first
-	    middleTest++;
+	    //middleTest++;
 	   
 	}
 	
@@ -176,6 +175,7 @@ public class CreateDrinkPage extends Activity {
 				meterialObj.put(metrialName,curWaterLevel);
 				TextView metarailText=(TextView)findViewById(R.id.TextView01);
 				metarailText.setText(metrialName);
+				createWaterView();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -215,14 +215,13 @@ public class CreateDrinkPage extends Activity {
 	public void createWaterView () {
 		RelativeLayout lay1 = (RelativeLayout)findViewById(R.id.layout1);
 		//temp.setT
-		waterColor = colorArr[middleTest];
 		View waterView= new View(this);
 		
 		int width = 720 - getPixels(184);
-		Log.d("width", Integer.toString(width));
+		//Log.d("width", Integer.toString(width));
 		int height = getPixels(cupHeight);
 		waterView.setX((float)getPixels(92));
-		waterView.setBackgroundColor(waterColor);
+		waterView.setBackgroundColor(colorArr[waterColor]);
 		waterView.setAlpha(0.4f);
 		waterView.setLayoutParams(new LayoutParams(width, height-4));
 
@@ -231,7 +230,7 @@ public class CreateDrinkPage extends Activity {
 		//waterView.setPivotY(400);
 		waterView.setPivotY(height-4);
 		curView = waterView;
-		
+		waterColor++;
 	} 
 	
 	public void waterLevelChange(float level) {
