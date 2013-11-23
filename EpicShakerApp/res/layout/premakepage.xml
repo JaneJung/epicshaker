@@ -32,7 +32,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/textView3"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +45,9 @@
     <Button
         android:id="@+id/button1"
         style="@style/ButtonStyle"
-        android:layout_below="@+id/TextView01"
+        android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="61dp"
         android:background="@drawable/buttonstyle"
         android:text="확인 완료" />
 

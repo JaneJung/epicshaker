@@ -47,13 +47,26 @@ public class PreMakePage extends Activity {
     };
     
     private void updateReceivedData(byte[] data) {
-        String[] arr=HexDump.dumpHexString(data).split(" ");
-        String a=arr[arr.length-1];
-    	String message = a.substring(0,a.length()-1);
-    	message = message.trim();
-    	//message = "3AB";
-    	int parseInt = Integer.parseInt(message, 16);
-        textView.setText(Integer.toString(parseInt));
+    	if(sDriver!=null){
+    		try{
+    			 //textView.setText(HexDump.dumpHexString(data));
+    			
+    	    	String[] arr=HexDump.dumpHexString(data).split(" ");
+    	        
+    	    	String a=arr[arr.length-1];
+    	    	String message = a.substring(0,a.length()-1);
+    	    	 textView.setText(message);
+    	    	
+    	    	message = message.trim();
+    	    	//message = "3AB";
+    	    	int parseInt = Integer.parseInt(message, 16);
+    	        textView.setText(Integer.toString(parseInt));
+    	        
+			} catch (NumberFormatException e) {
+				// Deal with error.
+			} 
+    		
+    	} 
     }
 
     
