@@ -65,8 +65,7 @@
        style="@style/TextStyle"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_alignBaseline="@+id/button2"
-       android:layout_alignBottom="@+id/button2"
+       android:layout_alignTop="@+id/button2"
        android:layout_centerHorizontal="true"
        android:text="현재 재료" />
 

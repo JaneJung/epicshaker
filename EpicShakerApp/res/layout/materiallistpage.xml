@@ -9,7 +9,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="재료 검색"
+        android:text="      재료 검색"
             style="@style/TitleFont"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="match_parent"
+        style="@style/TitleFont"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="음료 검색 페이지"
+        android:text="      음료 검색"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <SearchView

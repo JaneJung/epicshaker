@@ -29,26 +29,6 @@
         android:background="@drawable/buttonstyle"
         android:text="확인완료" />
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ratingBar1"
-        android:layout_below="@+id/textView2s"
-        android:layout_marginTop="49dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:text="\n" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText1"
-        android:layout_toLeftOf="@+id/editText1"
-        android:text="댓글" />
-
     <TextView
         android:id="@+id/textView2s"
         style="@style/TextStyle"
@@ -76,5 +56,28 @@
         android:layout_alignRight="@+id/button1"
         android:layout_marginRight="16dp"
         android:text="Bikini Martini" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText1"
+        android:layout_toLeftOf="@+id/textView1"
+        android:text="댓글" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/textView2s"
+        android:layout_marginTop="51dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:text="\n" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

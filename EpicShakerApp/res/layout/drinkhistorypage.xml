@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
           style="@style/TitleFont"
-        android:text="최근 제작 음료"
+        android:text="    최근 제작 음료"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView

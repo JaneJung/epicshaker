@@ -4,18 +4,7 @@
     
      android:background="@drawable/background2"
     android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="내가 만들었던
-   음료 목록"
-         style="@style/TitleFont"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
 
     <Button
         android:id="@+id/button1"
@@ -34,5 +23,27 @@
         android:layout_below="@+id/button1"
         android:layout_marginTop="40dp" >
     </ListView>
+
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/TitleFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="내가 만들었던"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/TitleFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp"
+        android:text="음료 목록"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
