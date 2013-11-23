@@ -31,6 +31,9 @@
             android:layout_marginRight="90dp"
             android:background="@drawable/cupborder" >
         </View>
+
+       
+
     </RelativeLayout>
 
     <Button
@@ -58,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:text="rum" />
+        android:text="없음" />
 
    <TextView
        android:id="@+id/TextView01"
@@ -68,5 +71,14 @@
        android:layout_alignTop="@+id/button2"
        android:layout_centerHorizontal="true"
        android:text="현재 재료" />
+
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignRight="@+id/TextView01"
+       android:text="Large Text"
+       android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
