@@ -16,17 +16,6 @@
         android:text="음료 정보"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginTop="24dp"
-        android:text="Bikini Martini"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <RelativeLayout
         android1:id="@+id/relativeLayout1"
         android1:layout_width="match_parent"
@@ -74,6 +63,18 @@
         android1:layout_above="@+id/relativeLayout1"
         android1:layout_alignLeft="@+id/button3"
         android1:text="이름:"
+        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android1:id="@+id/textView3"
+        style="@style/TextStyle"
+        android1:layout_width="200dp"
+        android1:layout_height="wrap_content"
+        android1:layout_alignLeft="@+id/textView6"
+        android1:layout_below="@+id/imageView1"
+        android1:layout_marginLeft="13dp"
+        android1:layout_marginTop="26dp"
+        android1:text="Bikini Martini"
         android1:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

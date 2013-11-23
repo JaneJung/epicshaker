@@ -109,13 +109,13 @@ public class DrinkNameSearchPage extends Activity   {
 	
 	public void sendDataToDrinkInfo(int position) {		
 		Intent intent = new Intent(getBaseContext(), DrinkInfoPage.class);
-		intent.putExtra("name",adapter.getItem(position).getLabel());
+		intent.putExtra("JSONstr",adapter.getItem(position).getJSON().toString());
 		startActivity(intent);
 	}
 	
 	public void setListData(String json) {
 		//theJsonString = new String(" {\"5668600916475904\": {\"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/02/85/28581.jpg\",       \"tags\": [         \"cool\"       ],       \"recipe\": {         \"vodka\": 21,         \"pineapple juice\": 28,         \"coconut rum\": 28       },       \"name\": \"Bikini Martini\",       \"description\": \"An awesome drink to sip by the pool! Garnish with an orange wheel.\"     },     \"5649050225344512\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/03/46/34689.jpg\",       \"tags\": [         \"sweet\"       ],       \"recipe\": {         \"gin\": 42,         \"vodca\": 56       },       \"name\": \"Dan Fay Martini\",       \"description\": \"My father believes in a condition called 'the gin meanies.' He invented this cocktail to satisfy his taste for gin, while allowing him to slightly dilute its effects with vodka. His passion for this concoction quickly spread to my friends, who have been known to throw parties solely to celebrate him and his martini.\"     },     \"5750085036015616\": {       \"image\": null,       \"tags\": [],       \"recipe\": {         \"tequila\": 170,         \"triple sec\": 56,         \"frozen sliced strawberries\": 226       },       \"name\": \"epicshaker\",       \"description\": null     },     \"5178081291534336\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/23/47/234705.jpg\",       \"tags\": [         \"sweet\",         \"cool\"       ],       \"recipe\": {         \"tequila\": 170,         \"triple sec\": 56,         \"frozen sliced strawberries\": 226       },       \"name\": \"Ultimate Frozen Strawberry Margarita\",       \"description\": \"A near perfect strawberry margarita with frozen strawberries and limeade concentrate.\"     },     \"5741031244955648\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/39/74/397413.jpg\",       \"tags\": [         \"sweet\"       ],       \"recipe\": {         \"tequila\": 141,         \"fresh lime juice\": 85,         \"triple sec\": 85,         \"sweetened lime juice\": 28       },       \"name\": \"Parker's Famous Margaritas\",       \"description\": \"This is the signature drink at my in-law's home. My father-in-law developed a taste for margaritas made from scratch during the summer they spent in Zihuatanejo during the 1960s. After decades of tinkering he has arrived at this foolproof recipe for the ultimate Mexican cocktail.\"     },     \"5724160613416960\": {       \"image\": \"http://images.media-allrecipes.com/userphotos/250x250/00/64/75/647594.jpg\",       \"tags\": [         \"sweet\",         \"cool\"       ],       \"recipe\": {         \"coconut milk\": 28,         \"pineapple juice\": 28,         \"rum\": 14       },       \"name\": \"Pina Colada III\",       \"description\": \"A simple run-of-the-mill pina colada drink.\"     }   }");
-		Log.d("epic", "dsgswdgsdgds");
+		//Log.d("epic", "dsgswdgsdgds");
 		
 		String theJsonString = json;
 		
@@ -153,7 +153,7 @@ public class DrinkNameSearchPage extends Activity   {
 				String key = (String) iterator.next();
 
 				adapter.add(new CData(getApplicationContext(), map.get(key).getString("name"),
-						map.get(key).getString("description"), 1));
+						map.get(key).getString("description"), 1,map.get(key)));
 
 			}
 		} catch (JSONException e) {
@@ -223,7 +223,7 @@ public class DrinkNameSearchPage extends Activity   {
 
 
 				// 이미지뷰에 뿌려질 해당 이미지값을 연결 즉 세번째 인수값
-				iv.setImageResource(data.getData2());
+				//iv.setImageResource(data.getData2());
 
 			}
 
@@ -233,55 +233,31 @@ public class DrinkNameSearchPage extends Activity   {
 
 	}
 
-	/*
-			public static Bitmap loadWebImage(String url) {
-				URL imgUrl;
-				Bitmap bitmap = null;
-				InputStream is = null;
-				HttpURLConnection conn = null;
-
-				try {
-					imgUrl = new URL(url);
-					conn = (HttpURLConnection)imgUrl.openConnection();
-					is = conn.getInputStream();
-					bitmap = BitmapFactory.decodeStream(is);
-				} catch(Exception e) {
-					e.printStackTrace();
-				} finally{
-					if(is != null) {
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if(conn != null) {
-						conn.disconnect();
-					}
-				}
-
-				return bitmap;
-			}
-	 */
-	// CData안에 받은 값을 직접 할당
 
 	class CData {
 
 		private String m_szLabel;
 		private String m_szData;
 		private int m_szData2;
+		private JSONObject jsonObj;
 
 		public CData(Context context, String p_szLabel, String p_szDataFile,
-				int p_szData2) {
+				int p_szData2, JSONObject json) {
 
 			m_szLabel = p_szLabel;
 
 			m_szData = p_szDataFile;
 
 			m_szData2 = p_szData2;
+			
 
+			jsonObj = json;
 		}
 
+		public JSONObject getJSON() {
+			return jsonObj;
+		}
+		
 		public String getLabel() {
 			return m_szLabel;
 		}
