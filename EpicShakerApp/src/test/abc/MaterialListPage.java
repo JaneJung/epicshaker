@@ -35,7 +35,7 @@ public class MaterialListPage extends Activity {
 	public SearchView searchView;
 	// 데이터를 연결할 Adapter
 	DataAdapter  adapter;
-
+	Map<String, JSONObject> map;
 	// 데이터를 담을 자료구조
 	ArrayList<CData> alist;
 
@@ -49,9 +49,9 @@ public class MaterialListPage extends Activity {
 		{
 			public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
 			{
-				sendDataToCreateDrink();
-				Intent intetn1 = new Intent(MaterialListPage.this , CreateDrinkPage.class);
-				startActivity(intetn1);
+//				clickedView.get
+				sendDataToCreateDrink(position);
+				//MaterialListPage.this.finish(); 
 			}
 
 
@@ -59,7 +59,6 @@ public class MaterialListPage extends Activity {
 		listview.setOnItemClickListener(listViewClickListener);
 
 
-		Log.d("epic","1");
 
 		try {
 			Method setListMethod;
@@ -72,15 +71,12 @@ public class MaterialListPage extends Activity {
 			e.printStackTrace();
 		}
 		//		setListMethod.
-		Log.d("epic","2");
 		searchView = (SearchView) findViewById(R.id.editText1);
-		Log.d("epic","3");
 		OnQueryTextListener searchViewQueryListner = new SearchView.OnQueryTextListener( ) {
 			@Override
 			public boolean onQueryTextChange( String newText ) {
 				Method setListMethod;
 				try {
-					Log.d("epic",newText);
 					Class[] parameterTypes = new Class[1];
 					parameterTypes[0] = String.class;
 					setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
@@ -95,18 +91,24 @@ public class MaterialListPage extends Activity {
 
 			@Override
 			public boolean   onQueryTextSubmit(String query) {
-				Log.d("epic",query);
+
 				//searchView.setText(query);
 				return false;
 			}
 		};
-		Log.d("epic","setSearch");
 		searchView.setOnQueryTextListener(searchViewQueryListner);
 
 	}
 
 
-	public void sendDataToCreateDrink() {
+	public void sendDataToCreateDrink(int position) {
+		Intent resultIntent = new Intent();
+		//resultIntent.put
+		Log.d("epic","ps: " + Integer.toString(position));
+		Log.d("epic","mp: " + adapter.getItem(position).getLabel());
+		resultIntent.putExtra("name",adapter.getItem(position).getLabel());
+		setResult(Activity.RESULT_OK, resultIntent);
+		finish();
 
 	}
 
@@ -133,8 +135,7 @@ public class MaterialListPage extends Activity {
 
 		// CData클래스를 만들때의 순서대로 해당 인수값을 입력
 		// 한줄 한줄이 리스트뷰에 뿌려질 한줄 한줄이라고 생각하면 됩니다.
-
-		Map<String, JSONObject> map = new HashMap<String, JSONObject>();
+		map = new HashMap<String, JSONObject>();
 		try {
 			JSONObject jsonObject = new JSONObject(theJsonString);
 			Iterator<String> keys = jsonObject.keys();
@@ -178,11 +179,10 @@ public class MaterialListPage extends Activity {
 		public View getView(int position, View v, ViewGroup parent) {
 			View view = null;
 
-			// 현재 리스트의 하나의 항목에 보일 컨트롤 얻기
+
 
 			if (v == null) {
 
-				// XML 레이아웃을 직접 읽어서 리스트뷰에 넣음
 				view = mInflater.inflate(R.layout.drinkitem, null);
 			} else {
 
@@ -229,38 +229,6 @@ public class MaterialListPage extends Activity {
 		}
 
 	}
-
-	/*
-			public static Bitmap loadWebImage(String url) {
-				URL imgUrl;
-				Bitmap bitmap = null;
-				InputStream is = null;
-				HttpURLConnection conn = null;
-
-				try {
-					imgUrl = new URL(url);
-					conn = (HttpURLConnection)imgUrl.openConnection();
-					is = conn.getInputStream();
-					bitmap = BitmapFactory.decodeStream(is);
-				} catch(Exception e) {
-					e.printStackTrace();
-				} finally{
-					if(is != null) {
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if(conn != null) {
-						conn.disconnect();
-					}
-				}
-
-				return bitmap;
-			}
-	 */
-	// CData안에 받은 값을 직접 할당
 
 	class CData {
 

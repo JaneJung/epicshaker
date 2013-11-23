@@ -7,8 +7,10 @@
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-        
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -20,10 +22,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="test.abc.CreateDrinkPage" >
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
@@ -31,6 +32,9 @@
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
                 android:resource="@xml/device_filter" />
+        </activity>
+        <activity android:name="test.abc.CreateDrinkPage" >
+
         </activity>
         <activity android:name="test.abc.CreateDrinkListPage" >
         </activity>
@@ -46,8 +50,15 @@
         </activity>
         <activity android:name="test.abc.PreMakePage" >
         </activity>
+        <activity android:name="test.abc.MaterialListPage" >
+        </activity>
+        <activity android:name="test.abc.DrinkInfoPage" >
+        </activity>
+        <activity android:name="test.abc.MakeDrinkPage" >
+        </activity>
         <activity
-            android:name="test.abc.MaterialListPage">
+            android:name="test.abc.InputDrinkInfoPage"
+            android:label="@string/title_activity_input_drink_info_page" >
         </activity>
     </application>
 

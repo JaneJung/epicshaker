@@ -39,7 +39,7 @@ public class HttpGetJson {
 	           
 	          HttpResponse response = null;
 	          HttpClient client = new DefaultHttpClient();
-	          HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
+	          HttpConnectionParams.setConnectionTimeout(client.getParams(), 1000);
 	          HttpGet httpGet = new HttpGet(urls[0]);
 	          try {
 	              response = client.execute(httpGet);

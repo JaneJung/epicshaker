@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 		Button btn3=(Button)findViewById(R.id.button3);
 		btn3.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intetn3 = new Intent(MainActivity.this , DrinkHistoryPage.class);
+				Intent intetn3 = new Intent(MainActivity.this , MakeDrinkPage.class);
 				startActivity(intetn3);
 			}
 		});

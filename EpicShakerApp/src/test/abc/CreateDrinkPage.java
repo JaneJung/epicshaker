@@ -3,6 +3,11 @@ package test.abc;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import java.lang.Object;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 
@@ -11,6 +16,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
+import android.database.MergeCursor;
 
 import android.graphics.Color;
 import android.hardware.usb.UsbManager;
@@ -31,28 +37,49 @@ import android.widget.RelativeLayout;
 
 public class CreateDrinkPage extends Activity {
 	/** Called when the activity is first created. */
-
+	String drinkName;
+	String des;
+	String tag;
 	int waterColor;
 	int curWaterLevel=0;
 	final int cupHeight=300;
-	
-	
+	int middleTest=0;
+	HttpFormPost formPost;
+	static int MetrailActivityCode=0;
+	JSONObject meterialObj;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.createdrinkpage);
-
-		
+		meterialObj = new JSONObject();
+		formPost = new HttpFormPost("http://epicshakerprj.appspot.com/addrecipe/");
 		
 		calculateWaterLevel(100);
-		calculateWaterLevel(200);
-		calculateWaterLevel(250);
+		
+		//calculateWaterLevel(250);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    drinkName = extras.getString("name");
+			Log.d("epic",drinkName);
+		    des = extras.getString("des");
+		    tag = extras.getString("tag");
+		    formPost.setHash("name", drinkName);
+		    formPost.setHash("description", des);
+		    formPost.setHash("tags", tag);
+		    
+		}
+		
+		
+		
 		Button btn1=(Button)findViewById(R.id.button1);
 		
 		btn1.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent intetn1 = new Intent(CreateDrinkPage.this , MaterialListPage.class);
-				startActivity(intetn1);
+				//intetn1.putExtra("Name", Value);
+				startActivityForResult(intetn1,MetrailActivityCode);
+				//startActivity(intetn1);
 			}
 		});
 		Button btn2=(Button)findViewById(R.id.button2);
@@ -61,6 +88,8 @@ public class CreateDrinkPage extends Activity {
 				Method complete;
 				Class[] parameterTypes = new Class[0];
 		        try {
+		        	formPost.setHash("recipe",meterialObj.toString());
+		        	formPost.postData();
 					complete = CreateDrinkPage.class.getMethod("complete", parameterTypes);
 					AlertObject altobj = new AlertObject(complete,CreateDrinkPage.this);
 					altobj.showAlert("제작이 완료되었습니다.");
@@ -74,6 +103,41 @@ public class CreateDrinkPage extends Activity {
 			}
 		});
 
+	}
+	
+	
+	@Override
+	public void onStop() {
+	    super.onStop();  // Always call the superclass method first
+	    middleTest++;
+	   
+	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == MetrailActivityCode && resultCode == Activity.RESULT_OK) {
+	        String metrialName = data.getStringExtra("name");
+	        try {
+				meterialObj.put(metrialName,100);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        //Log.d("epic",metrialName);
+	        // do something with B's return values
+	    }
+	}
+	
+	
+	@Override
+	public void onRestart() {
+	    super.onRestart();  // Always call the superclass method first
+	    if(middleTest == 1) {
+	    	calculateWaterLevel(200);
+	    } else if(middleTest == 2) {
+	    	calculateWaterLevel(250);
+	    }
 	}
 	
 	public void complete() {
@@ -112,7 +176,7 @@ public class CreateDrinkPage extends Activity {
 		int height = getPixels(cupHeight);
 		waterView.setX((float)getPixels(92));
 		waterView.setBackgroundColor(waterColor);
-		waterView.setAlpha(0.8f);
+		waterView.setAlpha(0.4f);
 		waterView.setLayoutParams(new LayoutParams(width, height-4));
 
 		lay1.addView(waterView);
