@@ -14,22 +14,28 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SearchView.OnQueryTextListener;
 
 
 public class DrinkNameSearchPage extends Activity   {
 
 	// 리스트뷰 선언
 	private ListView listview;
+	public SearchView searchView;
 
 	// 데이터를 연결할 Adapter
 	DataAdapter  adapter;
@@ -42,10 +48,25 @@ public class DrinkNameSearchPage extends Activity   {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.drinknamesearchpage);
-		Method setListMethod;
-		Class[] parameterTypes = new Class[1];
-        parameterTypes[0] = String.class;
+		
+		listview = (ListView) findViewById(R.id.listView1);
+		OnItemClickListener listViewClickListener = new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> parentView, View clickedView, int position, long id)
+			{
+//				clickedView.get
+				sendDataToDrinkInfo(position);
+				//MaterialListPage.this.finish(); 
+			}
+
+
+		};
+		listview.setOnItemClickListener(listViewClickListener);
+		
 		try {
+			Method setListMethod;
+			Class[] parameterTypes = new Class[1];
+	        parameterTypes[0] = String.class;
 			setListMethod = DrinkNameSearchPage.class.getMethod("setListData", parameterTypes);
 			new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/recipelist/");
 		} catch (NoSuchMethodException e) {
@@ -53,9 +74,43 @@ public class DrinkNameSearchPage extends Activity   {
 			e.printStackTrace();
 		}
 		
-		
+		searchView = (SearchView) findViewById(R.id.editText1);
+		OnQueryTextListener searchViewQueryListner = new SearchView.OnQueryTextListener( ) {
+			@Override
+			public boolean onQueryTextChange( String newText ) {
+				Method setListMethod;
+				try {
+					Class[] parameterTypes = new Class[1];
+					parameterTypes[0] = String.class;
+					setListMethod = DrinkNameSearchPage.class.getMethod("setListData", parameterTypes);
+					if (!newText.isEmpty())
+						new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/recipe/?name="+newText);
+					else
+						new HttpGetJson(setListMethod,DrinkNameSearchPage.this,"http://epicshakerprj.appspot.com/recipelist/");
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return false;
+			}
+
+			@Override
+			public boolean   onQueryTextSubmit(String query) {
+
+				//searchView.setText(query);
+				return false;
+			}
+		};
+		searchView.setOnQueryTextListener(searchViewQueryListner);
 		
 	
+	}
+	
+	public void sendDataToDrinkInfo(int position) {		
+		Intent intent = new Intent(getBaseContext(), DrinkInfoPage.class);
+		intent.putExtra("name",adapter.getItem(position).getLabel());
+		startActivity(intent);
 	}
 	
 	public void setListData(String json) {

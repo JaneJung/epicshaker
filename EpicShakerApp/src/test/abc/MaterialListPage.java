@@ -80,7 +80,10 @@ public class MaterialListPage extends Activity {
 					Class[] parameterTypes = new Class[1];
 					parameterTypes[0] = String.class;
 					setListMethod = MaterialListPage.class.getMethod("setListData", parameterTypes);
-					new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredient/?name="+newText);
+					if (!newText.isEmpty())
+						new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredient/?name="+newText);
+					else
+						new HttpGetJson(setListMethod,MaterialListPage.this,"http://epicshakerprj.appspot.com/ingredientlist/");
 				} catch (NoSuchMethodException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
