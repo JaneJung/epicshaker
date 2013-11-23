@@ -25,9 +25,16 @@ def get_beverage(request):
     if 'name' in request.GET:
         berg_name = request.GET['name']
         bergs = Beverage.query(Beverage.name == berg_name)
-    if 'tags' in request.GET:
-        berg_tags = request.GET.getlist('tags')
+    elif 'tags' in request.GET:
+        tags = request.GET['tags']
+        berg_tags = tags.split(", ")
         bergs = Beverage.query(Beverage.tags.IN(berg_tags))
+    elif 'ingredient' in request.GET:
+        ingredient = request.GET['ingredient']
+        all_bergs = Beverage.query()
+        for berg in all_bergs:
+            if ingredient in berg.recipe:
+                bergs.append(berg)
 
     for berg in bergs:
         data = {}
@@ -46,11 +53,22 @@ def add_beverage(request):
     if request.method != 'POST':
         return HttpResponse("should be post")
 
-    if 'name' in request.POST and 'recipe' in request.POST:
-        berg = Beverage(name = request.POST['name'],
-                        recipe = json.loads(request.POST['recipe']))
+    if 'name' not in request.POST:
+        return HttpResponse("name field is empty")
+    if 'recipe' not in request.POST:
+        return HttpResponse("name field is empty")
+
+    berg = Beverage(name = request.POST['name'],
+                    recipe = json.loads(request.POST['recipe']))
+
+    if 'tags' in request.POST:
+        tags = request.POST['tags']
+        berg.tags = tags.split(", ")
+
+    if 'description' in request.POST:
+        berg.description = request.POST['description']
 
     berg.put()
-    return HttpResponse("completed")
+    return HttpResponse('completed')
 
 
