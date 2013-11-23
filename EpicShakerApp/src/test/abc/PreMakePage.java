@@ -61,7 +61,7 @@ public class PreMakePage extends Activity {
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
     	        textView.setText(Integer.toString(parseInt));
-    	        
+    	        ((GlobalClass) this.getApplication()).setCupWeight(parseInt);
 			} catch (NumberFormatException e) {
 				// Deal with error.
 			} 
@@ -77,7 +77,6 @@ public class PreMakePage extends Activity {
 		setContentView(R.layout.premakepage);
 		 textView=(TextView)findViewById(R.id.textView3);
 		Button btn1=(Button)findViewById(R.id.button1);
-
 		btn1.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				Intent intetn2 = new Intent(PreMakePage.this , InputDrinkInfoPage.class);
