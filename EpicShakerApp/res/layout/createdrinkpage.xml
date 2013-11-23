@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
   android:layout_height="match_parent"
-       android:background="@drawable/background1"
+       android:background="@drawable/background2"
     android:orientation="vertical" >
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="음료 창작 페이지"
+        android:text="음료 창작"
             style="@style/TitleFont"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -34,25 +34,40 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/button2"
+        style="@style/SmallButtonStyle"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/buttonstyle"
+        android:text="창작 완료" />
+
+    <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
+        style="@style/SmallButtonStyle"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="63dp"
+        android:layout_below="@+id/layout1"
+        android:layout_marginTop="25dp"
         android:background="@drawable/buttonstyle"
         android:text="재료 선택" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout1"
-        android:layout_marginRight="31dp"
-        android:layout_marginTop="32dp"
-        android:layout_toLeftOf="@+id/button1"
-        android:background="@drawable/buttonstyle"
-        android:text="제작 완료" />
+        android:layout_alignBottom="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="rum" />
+
+   <TextView
+       android:id="@+id/TextView01"
+       style="@style/TextStyle"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/button2"
+       android:layout_alignBottom="@+id/button2"
+       android:layout_centerHorizontal="true"
+       android:text="현재 재료" />
 
 </RelativeLayout>

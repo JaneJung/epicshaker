@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     
-     android:background="@drawable/background1"
+     android:background="@drawable/background2"
     android:layout_height="match_parent" >
 
     <TextView
@@ -12,19 +12,19 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp"
-        android:text="내가 만들었던 음료 목록"
+        android:text="내가 만들었던
+   음료 목록"
          style="@style/TitleFont"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:background="@drawable/buttonstyle"
-        android:text="음료 창작" />
+        android:text="음료 제작" />
 
     <ListView
         android:id="@+id/listView1"

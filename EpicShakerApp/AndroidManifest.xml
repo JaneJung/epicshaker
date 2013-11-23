@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.NoTitleBar">
         <activity
             android:name="test.abc.MainActivity"
             android:label="@string/app_name" >
@@ -57,8 +57,7 @@
         <activity android:name="test.abc.MakeDrinkPage" >
         </activity>
         <activity
-            android:name="test.abc.InputDrinkInfoPage"
-            android:label="@string/title_activity_input_drink_info_page" >
+            android:name="test.abc.InputDrinkInfoPage" >
         </activity>
     </application>
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/background2">
 
     <TextView
         android:id="@+id/textView1"
@@ -10,26 +11,26 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
-        android:text="음료 검색 페이지"
+         style="@style/TitleFont"
+        android:text="음료 검색"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button2"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
-        android:text="이름으로 검색" />
+        android:layout_marginTop="94dp"
+        style="@style/ButtonStyle"
+        android:background="@drawable/buttonstyle"
+        android:text="고급 검색" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="33dp"
-        android:text="고급 검색" />
+        android:id="@+id/button1"
+        style="@style/ButtonStyle"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="174dp"
+        android:background="@drawable/buttonstyle"
+        android:text="이름으로 검색" />
 
 </RelativeLayout>
