@@ -34,7 +34,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button1"
         style="@style/ButtonStyle"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
@@ -47,7 +47,7 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
+        android:layout_above="@+id/button1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="19dp"
         android:text="을(를) 따라주세요" />
@@ -57,8 +57,16 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
+        android:layout_alignLeft="@+id/button1"
         android:layout_below="@+id/layout1"
         android:text="Rum" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Button" />
 
 </RelativeLayout>
