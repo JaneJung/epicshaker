@@ -1,10 +1,16 @@
 package test.abc;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.content.Context;
 import android.content.Intent;
 
 public class MainActivity extends Activity {
@@ -34,35 +40,30 @@ public class MainActivity extends Activity {
 		Button btn3=(Button)findViewById(R.id.button3);
 		btn3.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intetn3 = new Intent(MainActivity.this , MakeDrinkPage.class);
+				Intent intetn3 = new Intent(MainActivity.this , DrinkHistoryPage.class);
 				startActivity(intetn3);
 			}
 		});
-
 		
+		try {
+			makeFile("MakeHistoryData");
+			makeFile("CreateHistoryData");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void makeFile(String name) throws IOException {
 		
-		
-		
-		
-		/*
-		Button btnOrange=(Button)findViewById(R.id.button2);
-		btnOrange.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				TextView textFruit=(TextView)findViewById(R.id.fruit);
-				textFruit.setText("Orange");
-			}
-		});
-	*/	
+		File file = new File(getFilesDir(), name);
+		if (file.exists()) {
+		} else {
+			FileOutputStream fos = openFileOutput(name, Context.MODE_PRIVATE);
+			fos.close();
+		}
 	}
 
-	//@Override
-	/*
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-*/
 
 
 }

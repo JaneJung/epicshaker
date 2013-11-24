@@ -1,5 +1,7 @@
 package test.abc;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -60,18 +62,21 @@ public class MakeDrinkPage extends Activity {
 	String curMetarial;
 	Iterator<String> curKey;
 	Map<String, Integer> recipeInfo;
-	
+	String jsonStr;
+	String jsonId;
 	int maxValue;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.makedrinkpage);
-		String jsonStr;
+		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
+			jsonId = extras.getString("id");
 			jsonStr = extras.getString("JSONstr");
 			try {
-				jsonObj = new JSONObject(jsonStr);
+				jsonObj = new JSONObject(jsonStr).getJSONObject("recipe");
+				
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -244,7 +249,28 @@ public class MakeDrinkPage extends Activity {
 	
 	public void complete() {
 		Intent intetn1 = new Intent(MakeDrinkPage.this , MainActivity.class);
+		saveData();
 		startActivity(intetn1);
+	}
+	
+	private void saveData() {
+		FileOutputStream outputStream;
+		try {
+			String saveString ="";
+			saveString = "\""+ jsonId + "\":" + jsonStr + ",";
+			outputStream = openFileOutput("MakeFileHistory", Context.MODE_APPEND);
+			Log.d("epic",saveString);
+			outputStream.write(saveString.getBytes());
+		    outputStream.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		
 	}
 	
 	private void checkWaterLevel() {
