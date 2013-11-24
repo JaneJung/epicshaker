@@ -53,6 +53,8 @@ public class MakeDrinkPage extends Activity {
 	int colorArr[];
 	int curWeight = 0;
 	int waterColor=0;
+	int global_cnt=0;
+	int final_print=0;
 	TextView matView;
 	DrawView drawView;
 	private static UsbSerialDriver sDriver = null;
@@ -65,11 +67,12 @@ public class MakeDrinkPage extends Activity {
 	String jsonStr;
 	String jsonId;
 	int maxValue;
+	TextView temp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.makedrinkpage);
-		
+		temp=(TextView)findViewById(R.id.textView3);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			jsonId = extras.getString("id");
@@ -102,10 +105,11 @@ public class MakeDrinkPage extends Activity {
 			
 			}
 		});
-
+	
+		
 		matView = (TextView)findViewById(R.id.textView2);
 		curKey = jsonObj.keys();
-		
+		curWeight = ((GlobalClass) this.getApplication()).getCupWeight();
 		
 		setUsbSetting();
 		setColor();
@@ -205,7 +209,7 @@ public class MakeDrinkPage extends Activity {
 	
 	protected int calBorderY(int y) {
 		//Log.d("epic","oriY: " + Integer.toString(y));
-		y = ((cupHeight+50) * y) / maxValue;
+		y = ((cupHeight) * y) / maxValue;
 		
 		return y;
 	}
@@ -277,7 +281,7 @@ public class MakeDrinkPage extends Activity {
 		Log.d("epic","check: " + recipeInfo.get(curMetarial));
 		Log.d("epic","curWaterLevel: " + Integer.toString(curWaterLevel));
 
-		if(curWaterLevel+50 >= recipeInfo.get(curMetarial)) {
+		if(curWaterLevel >= recipeInfo.get(curMetarial)) {
 			if(curKey.hasNext()) {
 				curMetarial = curKey.next();
 				matView.setText(curMetarial);
@@ -369,7 +373,16 @@ public class MakeDrinkPage extends Activity {
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
     	        
-    	        calculateWaterLevel(parseInt);
+    	    	nomalize(parseInt);
+     			if(global_cnt==10){
+     				calculateWaterLevel(Math.abs(curWeight-final_print)/5);
+     				global_cnt=0;
+     			}
+     			temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
+     			//temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
+    	    	
+    	    	
+    	       // calculateWaterLevel(parseInt);
     	        //((GlobalClass) this.getApplication()).setCupWeight(parseInt);
 			} catch (NumberFormatException e) {
 				// Deal with error.
@@ -377,6 +390,18 @@ public class MakeDrinkPage extends Activity {
     		
     	} 
     }
+    
+    private int nomalize(int input){
+    	if(input<10||input<(final_print/10)||Math.abs(final_print-input)<2){
+    		return 0;
+    	}
+    	else{
+      		final_print=(final_print+input)/2;
+    		global_cnt++;
+    		return 0;
+    	}
+    }
+    
     
     private void stopIoManager() {
 		if (mSerialIoManager != null) {
