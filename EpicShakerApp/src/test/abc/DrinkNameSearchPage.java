@@ -1,6 +1,7 @@
 package test.abc;
 
 
+import java.io.InputStream;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
@@ -12,10 +13,15 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -202,26 +208,10 @@ public class DrinkNameSearchPage extends Activity   {
 				tv2.setText(data.getData());
 				//tv2.setTextColor(Color.WHITE);
 				ImageView iv = (ImageView) view.findViewById(R.id.imageView1);
-
-				/*
-						new Thread() {
-			                public void run() {
-			                    try {
-			                        String url = "http://img823.imageshack.us/img823/5467/bb9000.png";
-			                        InputStream is = (InputStream) new URL(url).getContent();
-			                        Bitmap bmp = BitmapFactory.decodeStream(is);
-			                        iv.setImageBitmap(bmp);
-			                       //Bitmap을 ImageView에 저장
-			                    } catch (Exception e) {
-			                    }
-			                }
-			            }.start();
-				 */
-
-
-				// 이미지뷰에 뿌려질 해당 이미지값을 연결 즉 세번째 인수값
-				//iv.setImageResource(data.getData2());
-
+				String imageUrl = data.getImageUrl();
+				if (imageUrl != "null") {
+					UrlImageViewHelper.setUrlDrawable(iv, imageUrl);
+				}
 			}
 
 			return view;
@@ -229,7 +219,6 @@ public class DrinkNameSearchPage extends Activity   {
 		}
 
 	}
-
 
 	class CData {
 
@@ -240,15 +229,10 @@ public class DrinkNameSearchPage extends Activity   {
 		private String keyData;
 		public CData(Context context, String p_szLabel, String p_szDataFile,
 				int p_szData2, JSONObject json, String key) {
-
 			m_szLabel = p_szLabel;
-
 			m_szData = p_szDataFile;
-
 			m_szData2 = p_szData2;
-			
 			keyData = key;
-			
 			jsonObj = json;
 		}
 
@@ -270,6 +254,17 @@ public class DrinkNameSearchPage extends Activity   {
 
 		public int getData2() {
 			return m_szData2;
+		}
+		
+		public String getImageUrl() {
+			String url = null;
+			try {
+				url =  jsonObj.getString("image");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return url;
 		}
 	}
 }

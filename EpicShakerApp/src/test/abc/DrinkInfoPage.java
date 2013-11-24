@@ -7,6 +7,8 @@ import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import test.abc.DrinkNameSearchPage.CData;
 import test.abc.DrinkNameSearchPage.DataAdapter;
 
@@ -41,6 +43,7 @@ public class DrinkInfoPage extends Activity {
 		
 		setContentView(R.layout.drinkinfopage);
 		String name = "";
+		String imageUrl = null;
 		String jsonStr = "";
 	
 		Log.d("epic", jsonStr);
@@ -61,6 +64,13 @@ public class DrinkInfoPage extends Activity {
 			name = jsonObj.getString("name");
 			TextView nameView =(TextView)findViewById(R.id.textView3);
 			nameView.setText(name);
+			ImageView iv = (ImageView)findViewById(R.id.imageView1);
+			imageUrl = jsonObj.getString("image");
+			Log.d("epic", imageUrl);
+			if (imageUrl != "null") {
+				UrlImageViewHelper.setUrlDrawable(iv, imageUrl);				
+			}
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

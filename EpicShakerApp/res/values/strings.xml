@@ -8,5 +8,6 @@
     <string name="title_activity_material_list_page">MaterialListPage</string>
     <string name="title_activity_drink_info_page">DrinkInfoPage</string>
     <string name="title_activity_input_drink_info_page">InputDrinkInfoPage</string>
+    <string name="title_activity_take_drink_picture">TakeDrinkPicture</string>
 
 </resources>
