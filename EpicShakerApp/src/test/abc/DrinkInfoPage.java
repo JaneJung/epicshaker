@@ -34,7 +34,7 @@ public class DrinkInfoPage extends Activity {
 	DataAdapter  adapter;
 	// 데이터를 담을 자료구조
 	ArrayList<CData> alist;
-	
+	String drinkId = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class DrinkInfoPage extends Activity {
 		setContentView(R.layout.drinkinfopage);
 		String name = "";
 		String jsonStr = "";
-		String drinkId = "";
+	
 		Log.d("epic", jsonStr);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -89,13 +89,9 @@ public class DrinkInfoPage extends Activity {
 
 	public void sendDataToDrinkMake() {		
 		Intent intent = new Intent(getBaseContext(), MakeDrinkPage.class);
-		try {
-			//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
-			intent.putExtra("JSONstr",jsonObj.getJSONObject("recipe").toString());
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
+		intent.putExtra("JSONstr",jsonObj.toString());
+		intent.putExtra("id",drinkId);
 		startActivity(intent);
 	}
 	
