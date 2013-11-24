@@ -21,6 +21,10 @@ import android.hardware.usb.UsbManager;
 
 
 public class PreMakePage extends Activity {
+	/* nomalize variables by choragi*/
+	int global_cnt=0;
+	int final_print=0;
+	
 	private TextView textView;
 	private static UsbSerialDriver sDriver = null;
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -60,8 +64,13 @@ public class PreMakePage extends Activity {
     	    	message = message.trim();
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
-    	        textView.setText(Integer.toString(parseInt));
-    	        ((GlobalClass) this.getApplication()).setCupWeight(parseInt);
+    	        nomalize(parseInt);
+    			if(global_cnt==10){
+    				((GlobalClass) this.getApplication()).setCupWeight(parseInt);
+    				global_cnt=0;
+    			}
+    			textView.setText(Integer.toString(parseInt/10));
+    	        
 			} catch (NumberFormatException e) {
 				// Deal with error.
 			} 
@@ -69,7 +78,17 @@ public class PreMakePage extends Activity {
     	} 
     }
 
-    
+    /* nomalization function by choragi */    
+    private int nomalize(int input){
+    	if(input<10||input<(final_print/10)||Math.abs(final_print-input)<2){
+    		return 0;
+    	}
+    	else{
+      		final_print=(final_print+input)/2;
+    		global_cnt++;
+    		return 0;
+    	}
+    }
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

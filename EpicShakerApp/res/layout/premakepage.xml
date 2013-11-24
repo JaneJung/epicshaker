@@ -55,7 +55,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="174dp"
-        android:text="컵 무게(ml)"
+        android:text="컵 무게(g)"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

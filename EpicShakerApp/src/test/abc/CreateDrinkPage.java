@@ -78,7 +78,7 @@ public class CreateDrinkPage extends Activity {
 		temp=(TextView)findViewById(R.id.textView2);
 		
 		curWeight = ((GlobalClass) this.getApplication()).getCupWeight();
-		temp.setText(Integer.toString(curWeight));
+		//temp.setText(Integer.toString(curWeight));
 		
 		
 
@@ -219,7 +219,7 @@ public class CreateDrinkPage extends Activity {
 	
 	public void calculateWaterLevel (int waterLevel) {
 		curWaterLevel = (int) (waterLevel);
-		temp.setText(Integer.toString(waterLevel));
+		//temp.setText(Integer.toString(waterLevel));
 		float level = curWaterLevel/(float)cupHeight;
 		waterLevelChange(level);
 		//updateWaterLevel(level);
@@ -297,15 +297,15 @@ public class CreateDrinkPage extends Activity {
     	    	message = message.trim();
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
-    	      
-    	        
+    	        //parseInt=Math.abs(curWeight-parseInt);
+    	    	
     	        /* nomalization code by choragi */
     	        nomalize(parseInt);
     			if(global_cnt==10){
-    				calculateWaterLevel(final_print/10);
+    				calculateWaterLevel(Math.abs(curWeight-final_print)/5);
     				global_cnt=0;
     			}
-    			temp.setText(Integer.toString(final_print/10));
+    			temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
     	        //((GlobalClass) this.getApplication()).setCupWeight(parseInt);
 			} catch (NumberFormatException e) {
 				// Deal with error.
