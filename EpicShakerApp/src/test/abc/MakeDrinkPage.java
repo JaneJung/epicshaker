@@ -21,6 +21,7 @@ import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import android.R.string;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -53,6 +54,8 @@ public class MakeDrinkPage extends Activity {
 	int colorArr[];
 	int curWeight = 0;
 	int waterColor=0;
+	int global_cnt=0;
+	int final_print=0;
 	TextView matView;
 	DrawView drawView;
 	private static UsbSerialDriver sDriver = null;
@@ -64,12 +67,13 @@ public class MakeDrinkPage extends Activity {
 	Map<String, Integer> recipeInfo;
 	String jsonStr;
 	String jsonId;
-	int maxValue;
+	int maxValue=0;
+	TextView temp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.makedrinkpage);
-		
+		temp=(TextView)findViewById(R.id.textView3);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			jsonId = extras.getString("id");
@@ -102,10 +106,11 @@ public class MakeDrinkPage extends Activity {
 			
 			}
 		});
-
+	
+		
 		matView = (TextView)findViewById(R.id.textView2);
 		curKey = jsonObj.keys();
-		
+		curWeight = ((GlobalClass) this.getApplication()).getCupWeight();
 		
 		setUsbSetting();
 		setColor();
@@ -143,7 +148,7 @@ public class MakeDrinkPage extends Activity {
 					if (arg0.isPressed()) {
 						curWaterLevel = curWaterLevel+10;
 						calculateWaterLevel(curWaterLevel);
-						//Log.d("epic",Integer.toString(curWaterLevel));
+						Log.d("epic","button data: " + Integer.toString(curWaterLevel));
 					}
 					return false;
 				}
@@ -168,7 +173,6 @@ public class MakeDrinkPage extends Activity {
 		while(keys.hasNext()) {
 			try {
 				String key = keys.next();
-				//recipeInfo.put(key,calBorderY(Integer.parseInt(jsonObj.getString(key))));
 				maxValue = maxValue + Integer.parseInt(jsonObj.getString(key));
 				if(firstFlag==0) {
 					curMetarial = curKey.next();
@@ -204,10 +208,11 @@ public class MakeDrinkPage extends Activity {
 	}
 	
 	protected int calBorderY(int y) {
-		//Log.d("epic","oriY: " + Integer.toString(y));
-		y = ((cupHeight+50) * y) / maxValue;
+		Log.d("epic","oriY: " + Integer.toString(y));
+		int r;
+		r = ((cupHeight) * y) / maxValue;
 		
-		return y;
+		return r;
 	}
 	
 	protected void drawBorder() {
@@ -217,7 +222,6 @@ public class MakeDrinkPage extends Activity {
 		width = displaymetrics.widthPixels;
 		cupX = getPixels(90); 
 		cupY = getPixels(cupHeight);
-		
 		drawView = new DrawView(this);
 		layout.addView(drawView);
 		
@@ -230,7 +234,7 @@ public class MakeDrinkPage extends Activity {
 			super(context);
 			paint.setColor(Color.BLACK);
 			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(2);
+			paint.setStrokeWidth(10);
 		}
 		@Override
 		public void onDraw(Canvas canvas) {
@@ -242,15 +246,29 @@ public class MakeDrinkPage extends Activity {
 			while(key.hasNext()) {
 				yValue = recipeInfo.get(key.next());
 				Log.d("epic","line data: " + Integer.toString(yValue));
-				canvas.drawLine(cupX, yValue, width-cupX, yValue, paint);
+				canvas.drawLine(cupX, getPixels(300-yValue), width-cupX, getPixels(300-yValue), paint);
 			}
 		}
 	}
 	
 	public void complete() {
-		Intent intetn1 = new Intent(MakeDrinkPage.this , MainActivity.class);
+		//Intent intetn1 = new Intent(MakeDrinkPage.this , DrinkEvaluatePage.class);
+		//
+		//startActivity(intetn1);
+		Intent intent = new Intent(getBaseContext(), DrinkEvaluatePage.class);
+		//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
 		saveData();
-		startActivity(intetn1);
+		JSONObject jso;
+		try {
+			jso = new JSONObject(jsonStr);
+			Log.d("epic","sdgsg      " + jso.getString("name"));
+			intent.putExtra("drinkName",jso.getString("name"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		intent.putExtra("id",jsonId);
+		startActivity(intent);
 	}
 	
 	private void saveData() {
@@ -277,13 +295,19 @@ public class MakeDrinkPage extends Activity {
 		Log.d("epic","check: " + recipeInfo.get(curMetarial));
 		Log.d("epic","curWaterLevel: " + Integer.toString(curWaterLevel));
 
-		if(curWaterLevel+50 >= recipeInfo.get(curMetarial)) {
+		if(curWaterLevel >= recipeInfo.get(curMetarial)) {
+			Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);   
+			vibe.vibrate(1000);     
 			if(curKey.hasNext()) {
 				curMetarial = curKey.next();
 				matView.setText(curMetarial);
 				createWaterView(); 
 			} else {
-				complete();
+				matView.setText("완료되었습니다.");
+				TextView textxt = (TextView)findViewById(R.id.TextView01);
+				textxt.setText("");
+				
+				//complete();
 			}
 		}
 	}
@@ -369,7 +393,16 @@ public class MakeDrinkPage extends Activity {
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
     	        
-    	        calculateWaterLevel(parseInt);
+    	    	nomalize(parseInt);
+     			if(global_cnt==10){
+     				calculateWaterLevel(Math.abs(curWeight-final_print)/5);
+     				global_cnt=0;
+     			}
+     			temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
+     			//temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
+    	    	
+    	    	
+    	       // calculateWaterLevel(parseInt);
     	        //((GlobalClass) this.getApplication()).setCupWeight(parseInt);
 			} catch (NumberFormatException e) {
 				// Deal with error.
@@ -377,6 +410,18 @@ public class MakeDrinkPage extends Activity {
     		
     	} 
     }
+    
+    private int nomalize(int input){
+    	if(input<10||input<(final_print/10)||Math.abs(final_print-input)<2){
+    		return 0;
+    	}
+    	else{
+      		final_print=(final_print+input)/2;
+    		global_cnt++;
+    		return 0;
+    	}
+    }
+    
     
     private void stopIoManager() {
 		if (mSerialIoManager != null) {

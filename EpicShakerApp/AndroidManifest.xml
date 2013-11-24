@@ -12,7 +12,10 @@
     </uses-permission>
     <uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" >
+    </uses-permission>
+
     <application
         android:name="test.abc.GlobalClass"
         android:allowBackup="true"
@@ -60,10 +63,11 @@
         </activity>
         <activity android:name="test.abc.InputDrinkInfoPage" >
         </activity>
-        <activity
-            android:name="test.abc.TakeDrinkPicture"
-            android:label="@string/title_activity_take_drink_picture" >
+        <activity android:name="test.abc.TakeDrinkPicture" >
         </activity>
-    </application>
+        <activity android:name="test.abc.DrinkEvaluatePage" >
+        </activity>
+        
+        </application>
 
 </manifest>

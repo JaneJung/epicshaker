@@ -43,6 +43,7 @@ public class CreateDrinkPage extends Activity {
 	String tag;
 	int waterColor=0;
 	int curWaterLevel=0;
+	int preLevel=0;
 	int cupHeight=300;
 	int colorArr[];
 	int curWeight = 0;
@@ -50,7 +51,7 @@ public class CreateDrinkPage extends Activity {
 	/* nomalize variables by choragi*/
 	int global_cnt=0;
 	int final_print=0;
-	
+	String metrialName="";
 	HttpFormPost formPost;
 	View curView;
 	static int MetrailActivityCode=0;
@@ -115,12 +116,17 @@ public class CreateDrinkPage extends Activity {
 				Method complete;
 				Class[] parameterTypes = new Class[0];
 		        try {
+		        	
+					meterialObj.put(metrialName,curWaterLevel-preLevel);
 		        	formPost.setHash("recipe",meterialObj.toString());
 		        	formPost.postData();
 					complete = CreateDrinkPage.class.getMethod("complete", parameterTypes);
 					AlertObject altobj = new AlertObject(complete,CreateDrinkPage.this);
 					altobj.showAlert("제작이 완료되었습니다.");
 				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -189,9 +195,12 @@ public class CreateDrinkPage extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == MetrailActivityCode && resultCode == Activity.RESULT_OK) {
-	        String metrialName = data.getStringExtra("name");
-	        try {
-				meterialObj.put(metrialName,curWaterLevel);
+	    	try {
+	    		if(metrialName != "") {
+	    			meterialObj.put(metrialName,curWaterLevel-preLevel);
+	    		}
+	    		preLevel = curWaterLevel;
+	    		metrialName = data.getStringExtra("name");
 				TextView metarailText=(TextView)findViewById(R.id.TextView01);
 				metarailText.setText(metrialName);
 				createWaterView();

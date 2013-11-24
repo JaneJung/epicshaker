@@ -7,8 +7,11 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="libs/usb-serial-for-android-v010.jar"/>
 	<classpathentry kind="lib" path="libs/urlimageviewhelper-1.0.4.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="libs/httpclient-4.2.5.jar"/>
 	<classpathentry kind="lib" path="libs/httpcore-4.2.4.jar"/>
 	<classpathentry kind="lib" path="libs/httpmime-4.2.5.jar"/>
+=======
+>>>>>>> branch 'master' of https://github.com/JaneJung/epicshaker.git
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

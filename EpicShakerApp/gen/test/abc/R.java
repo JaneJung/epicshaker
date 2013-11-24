@@ -22,37 +22,40 @@ public final class R {
     }
     public static final class drawable {
         public static final int background2=0x7f020000;
-        public static final int bm=0x7f020001;
-        public static final int border=0x7f020002;
-        public static final int buttonstyle=0x7f020003;
-        public static final int cupborder=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int item_selector=0x7f020006;
+        public static final int basy=0x7f020001;
+        public static final int bm=0x7f020002;
+        public static final int border=0x7f020003;
+        public static final int buttonstyle=0x7f020004;
+        public static final int cupborder=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int item_selector=0x7f020007;
+        public static final int no_sign=0x7f020008;
     }
     public static final class id {
-        public static final int EditText01=0x7f09000a;
-        public static final int EditText02=0x7f090008;
+        public static final int EditText01=0x7f09000b;
+        public static final int EditText02=0x7f09000c;
         public static final int TextView01=0x7f090007;
-        public static final int TextView02=0x7f09000b;
-        public static final int TextView03=0x7f09000c;
-        public static final int action_settings=0x7f090017;
+        public static final int TextView02=0x7f09000a;
+        public static final int TextView03=0x7f090009;
+        public static final int action_settings=0x7f090018;
+        public static final int button=0x7f090016;
         public static final int button1=0x7f090000;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090001;
-        public static final int editText1=0x7f090009;
-        public static final int editText2=0x7f090016;
-        public static final int editText3=0x7f090015;
-        public static final int imageView1=0x7f090010;
+        public static final int editText1=0x7f09000d;
+        public static final int editText2=0x7f090015;
+        public static final int editText3=0x7f090014;
+        public static final int image=0x7f090017;
+        public static final int imageView1=0x7f090012;
         public static final int layout1=0x7f090005;
-        public static final int linearLayout1=0x7f090014;
+        public static final int linearLayout1=0x7f090013;
         public static final int listView1=0x7f090004;
-        public static final int ratingBar1=0x7f09000d;
+        public static final int ratingBar1=0x7f09000e;
         public static final int relativeLayout1=0x7f090011;
         public static final int textView1=0x7f090003;
-        public static final int textView2=0x7f090013;
-        public static final int textView2s=0x7f09000e;
-        public static final int textView3=0x7f09000f;
-        public static final int textView6=0x7f090012;
+        public static final int textView2=0x7f090008;
+        public static final int textView2s=0x7f09000f;
+        public static final int textView3=0x7f090010;
         public static final int view1=0x7f090006;
     }
     public static final class layout {
@@ -69,7 +72,9 @@ public final class R {
         public static final int inputdrinkinfopage=0x7f03000a;
         public static final int makedrinkpage=0x7f03000b;
         public static final int materiallistpage=0x7f03000c;
-        public static final int premakepage=0x7f03000d;
+        public static final int postitem=0x7f03000d;
+        public static final int premakepage=0x7f03000e;
+        public static final int takedrinkpicture=0x7f03000f;
     }
     public static final class menu {
         public static final int drink_info_page=0x7f080000;
@@ -86,6 +91,7 @@ public final class R {
         public static final int title_activity_input_drink_info_page=0x7f060006;
         public static final int title_activity_material_list_page=0x7f060004;
         public static final int title_activity_pre_make_page=0x7f060003;
+        public static final int title_activity_take_drink_picture=0x7f060007;
     }
     public static final class style {
         /** 

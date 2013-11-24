@@ -98,7 +98,7 @@ public class DrinkInfoPage extends Activity {
 	}
 
 	public void sendDataToDrinkMake() {		
-		Intent intent = new Intent(getBaseContext(), MakeDrinkPage.class);
+		Intent intent = new Intent(getBaseContext(), PreMakePage.class);
 		//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
 		intent.putExtra("JSONstr",jsonObj.toString());
 		intent.putExtra("id",drinkId);

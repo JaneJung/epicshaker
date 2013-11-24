@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.HexDump;
@@ -24,7 +27,8 @@ public class PreMakePage extends Activity {
 	/* nomalize variables by choragi*/
 	int global_cnt=0;
 	int final_print=0;
-	
+	String drinkId="";
+	String jsonStr="";
 	private TextView textView;
 	private static UsbSerialDriver sDriver = null;
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -96,13 +100,31 @@ public class PreMakePage extends Activity {
 		setContentView(R.layout.premakepage);
 		 textView=(TextView)findViewById(R.id.textView3);
 		Button btn1=(Button)findViewById(R.id.button1);
-		btn1.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intetn2 = new Intent(PreMakePage.this , InputDrinkInfoPage.class);
-				startActivity(intetn2);
-			}
-		});
 		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			 drinkId = extras.getString("id");
+			 jsonStr = extras.getString("JSONstr");
+		
+			btn1.setOnClickListener(new Button.OnClickListener() {
+				public void onClick(View v) {
+					Intent intent = new Intent(getBaseContext(), MakeDrinkPage.class);
+					//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
+					intent.putExtra("JSONstr",jsonStr);
+					intent.putExtra("id",drinkId);
+					startActivity(intent);
+				}
+			});
+			
+			
+		} else {
+			btn1.setOnClickListener(new Button.OnClickListener() {
+				public void onClick(View v) {
+					Intent intetn2 = new Intent(PreMakePage.this , InputDrinkInfoPage.class);
+					startActivity(intetn2);
+				}
+			});
+		}
 		
 		UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 

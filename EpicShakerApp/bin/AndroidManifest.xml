@@ -10,12 +10,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
+        android:name="test.abc.GlobalClass"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name="test.abc.MainActivity"
             android:label="@string/app_name" >
@@ -34,7 +37,6 @@
                 android:resource="@xml/device_filter" />
         </activity>
         <activity android:name="test.abc.CreateDrinkPage" >
-
         </activity>
         <activity android:name="test.abc.CreateDrinkListPage" >
         </activity>
@@ -56,8 +58,11 @@
         </activity>
         <activity android:name="test.abc.MakeDrinkPage" >
         </activity>
+        <activity android:name="test.abc.InputDrinkInfoPage" >
+        </activity>
         <activity
-            android:name="test.abc.InputDrinkInfoPage" >
+            android:name="test.abc.TakeDrinkPicture"
+            android:label="@string/title_activity_take_drink_picture" >
         </activity>
     </application>
 
