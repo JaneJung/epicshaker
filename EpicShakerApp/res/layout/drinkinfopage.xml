@@ -27,54 +27,43 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android1:id="@+id/imageView1"
-        android1:layout_width="60dp"
-        android1:layout_height="60dp"
-        android1:layout_below="@+id/textView1"
-        android1:layout_centerHorizontal="true"
-        android1:layout_marginTop="25dp"
-        android1:src="@drawable/bm" />
-
-    <TextView
-        android1:id="@+id/textView6"
-        style="@style/TextStyle"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_alignBottom="@+id/relativeLayout1"
-        android1:layout_centerHorizontal="true"
-        android1:text="댓글 목록"
-        android1:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android1:id="@+id/button3"
-        style="@style/ButtonStyle"
-        android1:layout_below="@+id/relativeLayout1"
-        android1:layout_centerHorizontal="true"
-        android1:layout_marginTop="90dp"
-        android1:background="@drawable/buttonstyle"
-        android1:text="음료 제작" />
-
-    <TextView
-        android1:id="@+id/textView2"
-        style="@style/TextStyle"
-        android1:layout_width="wrap_content"
-        android1:layout_height="wrap_content"
-        android1:layout_above="@+id/relativeLayout1"
-        android1:layout_alignLeft="@+id/button3"
-        android1:text="이름:"
-        android1:textAppearance="?android:attr/textAppearanceLarge" />
-
     <TextView
         android1:id="@+id/textView3"
         style="@style/TextStyle"
         android1:layout_width="200dp"
         android1:layout_height="wrap_content"
-        android1:layout_alignLeft="@+id/textView6"
-        android1:layout_below="@+id/imageView1"
-        android1:layout_marginLeft="13dp"
-        android1:layout_marginTop="26dp"
+        android1:layout_alignBottom="@+id/imageView1"
+        android1:layout_alignParentRight="true"
         android1:text="Bikini Martini"
         android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android1:id="@+id/imageView1"
+        android1:layout_width="60dp"
+        android1:layout_height="60dp"
+        android1:layout_alignLeft="@+id/button3"
+        android1:layout_below="@+id/textView1"
+        android1:layout_marginLeft="14dp"
+        android1:layout_marginTop="21dp"
+        android1:src="@drawable/bm" />
+
+    <Button
+        android1:id="@+id/button3"
+        style="@style/ButtonStyle"
+        android1:layout_below="@+id/textView3"
+        android1:layout_centerHorizontal="true"
+        android1:layout_marginTop="25dp"
+        android1:background="@drawable/buttonstyle"
+        android1:text="음료 제작" />
+
+    <ListView
+        android1:id="@+id/listView1"
+        android1:layout_width="match_parent"
+        android1:layout_height="200dp"
+        android1:layout_alignParentLeft="true"
+        android1:layout_below="@+id/button3"
+        android1:layout_marginTop="20dp"
+        android1:layout_weight="0.40" >
+    </ListView>
 
 </RelativeLayout>
