@@ -21,6 +21,7 @@ import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import android.R.string;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -66,7 +67,7 @@ public class MakeDrinkPage extends Activity {
 	Map<String, Integer> recipeInfo;
 	String jsonStr;
 	String jsonId;
-	int maxValue;
+	int maxValue=0;
 	TextView temp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public class MakeDrinkPage extends Activity {
 					if (arg0.isPressed()) {
 						curWaterLevel = curWaterLevel+10;
 						calculateWaterLevel(curWaterLevel);
-						//Log.d("epic",Integer.toString(curWaterLevel));
+						Log.d("epic","button data: " + Integer.toString(curWaterLevel));
 					}
 					return false;
 				}
@@ -172,7 +173,6 @@ public class MakeDrinkPage extends Activity {
 		while(keys.hasNext()) {
 			try {
 				String key = keys.next();
-				//recipeInfo.put(key,calBorderY(Integer.parseInt(jsonObj.getString(key))));
 				maxValue = maxValue + Integer.parseInt(jsonObj.getString(key));
 				if(firstFlag==0) {
 					curMetarial = curKey.next();
@@ -208,10 +208,11 @@ public class MakeDrinkPage extends Activity {
 	}
 	
 	protected int calBorderY(int y) {
-		//Log.d("epic","oriY: " + Integer.toString(y));
-		y = ((cupHeight) * y) / maxValue;
+		Log.d("epic","oriY: " + Integer.toString(y));
+		int r;
+		r = ((cupHeight) * y) / maxValue;
 		
-		return y;
+		return r;
 	}
 	
 	protected void drawBorder() {
@@ -221,7 +222,6 @@ public class MakeDrinkPage extends Activity {
 		width = displaymetrics.widthPixels;
 		cupX = getPixels(90); 
 		cupY = getPixels(cupHeight);
-		
 		drawView = new DrawView(this);
 		layout.addView(drawView);
 		
@@ -234,7 +234,7 @@ public class MakeDrinkPage extends Activity {
 			super(context);
 			paint.setColor(Color.BLACK);
 			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(2);
+			paint.setStrokeWidth(10);
 		}
 		@Override
 		public void onDraw(Canvas canvas) {
@@ -246,7 +246,7 @@ public class MakeDrinkPage extends Activity {
 			while(key.hasNext()) {
 				yValue = recipeInfo.get(key.next());
 				Log.d("epic","line data: " + Integer.toString(yValue));
-				canvas.drawLine(cupX, yValue, width-cupX, yValue, paint);
+				canvas.drawLine(cupX, getPixels(300-yValue), width-cupX, getPixels(300-yValue), paint);
 			}
 		}
 	}
@@ -282,12 +282,18 @@ public class MakeDrinkPage extends Activity {
 		Log.d("epic","curWaterLevel: " + Integer.toString(curWaterLevel));
 
 		if(curWaterLevel >= recipeInfo.get(curMetarial)) {
+			Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);   
+			vibe.vibrate(1000);     
 			if(curKey.hasNext()) {
 				curMetarial = curKey.next();
 				matView.setText(curMetarial);
 				createWaterView(); 
 			} else {
-				complete();
+				matView.setText("완료되었습니다.");
+				TextView textxt = (TextView)findViewById(R.id.TextView01);
+				textxt.setText("");
+				
+				//complete();
 			}
 		}
 	}
