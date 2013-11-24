@@ -57,18 +57,10 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true"
         android:text="없음" />
-
-   <TextView
-       android:id="@+id/TextView01"
-       style="@style/TextStyle"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignTop="@+id/button2"
-       android:layout_centerHorizontal="true"
-       android:text="현재 재료" />
 
    <TextView
        android:id="@+id/textView2"
@@ -86,5 +78,15 @@
        android:layout_alignParentRight="true"
        android:layout_alignParentTop="true"
        android:text="Button" />
+
+   <TextView
+       android:id="@+id/TextView01"
+       style="@style/TextStyle"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/button1"
+       android:layout_alignBottom="@+id/button1"
+       android:layout_centerHorizontal="true"
+       android:text="현재 재료" />
 
 </RelativeLayout>

@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class CreateDrinkPage extends Activity {
+	
 	/** Called when the activity is first created. */
 	String drinkName;
 	String des;
@@ -45,6 +46,11 @@ public class CreateDrinkPage extends Activity {
 	int cupHeight=300;
 	int colorArr[];
 	int curWeight = 0;
+	
+	/* nomalize variables by choragi*/
+	int global_cnt=0;
+	int final_print=0;
+	
 	HttpFormPost formPost;
 	View curView;
 	static int MetrailActivityCode=0;
@@ -247,6 +253,8 @@ public class CreateDrinkPage extends Activity {
 		waterColor++;
 	} 
 	
+	
+	
 	public void waterLevelChange(float level) {
 		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(curView, View.SCALE_Y,
 				0,level);
@@ -289,14 +297,33 @@ public class CreateDrinkPage extends Activity {
     	    	message = message.trim();
     	    	//message = "3AB";
     	    	int parseInt = Integer.parseInt(message, 16);
-    	        temp.setText(Integer.toString(parseInt));
-    	        calculateWaterLevel(parseInt);
+    	      
+    	        
+    	        /* nomalization code by choragi */
+    	        nomalize(parseInt);
+    			if(global_cnt==10){
+    				calculateWaterLevel(final_print/10);
+    				global_cnt=0;
+    			}
+    			temp.setText(Integer.toString(final_print/10));
     	        //((GlobalClass) this.getApplication()).setCupWeight(parseInt);
 			} catch (NumberFormatException e) {
 				// Deal with error.
 			} 
     		
     	} 
+    }
+    
+    /* nomalization function by choragi */    
+    private int nomalize(int input){
+    	if(input<10||input<(final_print/10)||Math.abs(final_print-input)<2){
+    		return 0;
+    	}
+    	else{
+      		final_print=(final_print+input)/2;
+    		global_cnt++;
+    		return 0;
+    	}
     }
     
     private void stopIoManager() {
