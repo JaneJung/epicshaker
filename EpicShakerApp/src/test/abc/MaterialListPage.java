@@ -9,6 +9,8 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import test.abc.DrinkNameSearchPage.CData;
 import test.abc.DrinkNameSearchPage.DataAdapter;
 
@@ -153,7 +155,7 @@ public class MaterialListPage extends Activity {
 				String key = (String) iterator.next();
 
 				adapter.add(new CData(getApplicationContext(), map.get(key).getString("name"),
-						"", 1));
+						map.get(key).getString("image"), 1));
 
 			}
 		} catch (JSONException e) {
@@ -202,28 +204,16 @@ public class MaterialListPage extends Activity {
 				// 텍스트뷰1에 getLabel()을 출력 즉 첫번째 인수값
 				tv.setText(data.getLabel());
 				// 텍스트뷰2에 getData()을 출력 즉 두번째 인수값
-				tv2.setText(data.getData());
+				tv2.setText("");
 				//tv2.setTextColor(Color.WHITE);
-				ImageView iv = (ImageView) view.findViewById(R.id.imageView1);
-
-				/*
-						new Thread() {
-			                public void run() {
-			                    try {
-			                        String url = "http://img823.imageshack.us/img823/5467/bb9000.png";
-			                        InputStream is = (InputStream) new URL(url).getContent();
-			                        Bitmap bmp = BitmapFactory.decodeStream(is);
-			                        iv.setImageBitmap(bmp);
-			                       //Bitmap을 ImageView에 저장
-			                    } catch (Exception e) {
-			                    }
-			                }
-			            }.start();
-				 */
-
+//				ImageView iv = (ImageView) view.findViewById(R.id.imageView1);
+//				String imageUrl = data.getImageUrl();
+//				if (imageUrl != "null") {
+//					UrlImageViewHelper.setUrlDrawable(iv, imageUrl);
+//				}
 
 				// 이미지뷰에 뿌려질 해당 이미지값을 연결 즉 세번째 인수값
-				iv.setImageResource(data.getData2());
+				//iv.setImageResource(data.getData2());
 
 			}
 
@@ -236,7 +226,7 @@ public class MaterialListPage extends Activity {
 	class CData {
 
 		private String m_szLabel;
-		private String m_szData;
+		private String imageUrl;
 		private int m_szData2;
 
 		public CData(Context context, String p_szLabel, String p_szDataFile,
@@ -244,7 +234,7 @@ public class MaterialListPage extends Activity {
 
 			m_szLabel = p_szLabel;
 
-			m_szData = p_szDataFile;
+			imageUrl = p_szDataFile;
 
 			m_szData2 = p_szData2;
 
@@ -254,12 +244,12 @@ public class MaterialListPage extends Activity {
 			return m_szLabel;
 		}
 
-		public String getData() {
-			return m_szData;
-		}
-
 		public int getData2() {
 			return m_szData2;
+		}
+		
+		public String getImageUrl() {
+			return imageUrl;
 		}
 	}
 }
