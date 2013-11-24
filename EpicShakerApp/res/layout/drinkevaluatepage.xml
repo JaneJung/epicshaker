@@ -57,6 +57,19 @@
         android:layout_marginRight="16dp"
         android:text="Bikini Martini" />
 
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2s"
+        android:layout_marginTop="54dp"
+        android:layout_toRightOf="@+id/textView2s"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:lines="1"
+        android:singleLine="true"
+        android:text="\n" />
+
     <TextView
         android:id="@+id/TextView01"
         style="@style/TextStyle"
@@ -65,23 +78,5 @@
         android:layout_alignTop="@+id/editText1"
         android:layout_toLeftOf="@+id/textView1"
         android:text="댓글" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/textView2s"
-        android:layout_marginTop="51dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:text="\n"
-        android:singleLine = "true"
-android:lines = "1"
-         >
-        
-
-        <requestFocus />
-    </EditText>
 
 </RelativeLayout>

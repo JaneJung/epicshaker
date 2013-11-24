@@ -252,9 +252,23 @@ public class MakeDrinkPage extends Activity {
 	}
 	
 	public void complete() {
-		Intent intetn1 = new Intent(MakeDrinkPage.this , MainActivity.class);
+		//Intent intetn1 = new Intent(MakeDrinkPage.this , DrinkEvaluatePage.class);
+		//
+		//startActivity(intetn1);
+		Intent intent = new Intent(getBaseContext(), DrinkEvaluatePage.class);
+		//Log.d("epic", jsonObj.getJSONObject("recipe").toString());
 		saveData();
-		startActivity(intetn1);
+		JSONObject jso;
+		try {
+			jso = new JSONObject(jsonStr);
+			Log.d("epic","sdgsg      " + jso.getString("name"));
+			intent.putExtra("drinkName",jso.getString("name"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		intent.putExtra("id",jsonId);
+		startActivity(intent);
 	}
 	
 	private void saveData() {

@@ -62,10 +62,11 @@
         </activity>
         <activity android:name="test.abc.InputDrinkInfoPage" >
         </activity>
-        <activity
-            android:name="test.abc.TakeDrinkPicture"
-            android:label="@string/title_activity_take_drink_picture" >
+        <activity android:name="test.abc.TakeDrinkPicture" >
         </activity>
-    </application>
+        <activity android:name="test.abc.DrinkEvaluatePage" >
+        </activity>
+        
+        </application>
 
 </manifest>
