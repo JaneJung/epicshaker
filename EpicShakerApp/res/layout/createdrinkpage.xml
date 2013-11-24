@@ -32,8 +32,6 @@
             android:background="@drawable/cupborder" >
         </View>
 
-       
-
     </RelativeLayout>
 
     <Button
@@ -80,5 +78,13 @@
        android:layout_alignRight="@+id/TextView01"
        android:text="Large Text"
        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+   <Button
+       android:id="@+id/button3"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:text="Button" />
 
 </RelativeLayout>

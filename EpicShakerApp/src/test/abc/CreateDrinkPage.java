@@ -27,7 +27,9 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -51,6 +53,7 @@ public class CreateDrinkPage extends Activity {
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private SerialInputOutputManager mSerialIoManager;
 	TextView temp;
+	Button sb;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,18 +71,13 @@ public class CreateDrinkPage extends Activity {
 		//textView2
 		temp=(TextView)findViewById(R.id.textView2);
 		
-		
 		curWeight = ((GlobalClass) this.getApplication()).getCupWeight();
 		temp.setText(Integer.toString(curWeight));
 		
 		
-		//calculateWaterLevel(500);
 
-		//calculateWaterLevel(500);
 		createWaterView();
-		//calculateWaterLevel(200);
-		
-//		calculateWaterLevel(250);
+
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -127,7 +125,7 @@ public class CreateDrinkPage extends Activity {
 		});
 
 		UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-		Log.d("epic","123141251251");
+		//Log.d("epic","123141251251");
 		
 		// Find the first available driver.
 		sDriver = UsbSerialProber.acquire(manager);
@@ -145,6 +143,21 @@ public class CreateDrinkPage extends Activity {
 			} catch (IOException e) {
 				// Deal with error.
 			} 
+		} else {
+			sb=(Button)findViewById(R.id.button3);
+			sb.setOnTouchListener(new OnTouchListener() {
+		       
+				@Override
+				public boolean onTouch(View arg0, MotionEvent arg1) {
+					// TODO Auto-generated method stub
+					if (arg0.isPressed()) {
+						curWaterLevel = curWaterLevel+10;
+						calculateWaterLevel(curWaterLevel);
+						Log.d("epic",Integer.toString(curWaterLevel));
+					}
+					return false;
+				}
+		    });
 		}
 		
 		
@@ -230,13 +243,14 @@ public class CreateDrinkPage extends Activity {
 		//waterView.setPivotY(400);
 		waterView.setPivotY(height-4);
 		curView = waterView;
+		waterLevelChange(0);
 		waterColor++;
 	} 
 	
 	public void waterLevelChange(float level) {
 		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(curView, View.SCALE_Y,
 				0,level);
-		imageAnimator.setDuration(500);
+		imageAnimator.setDuration(0);
 		imageAnimator.start();
 	}
 	
