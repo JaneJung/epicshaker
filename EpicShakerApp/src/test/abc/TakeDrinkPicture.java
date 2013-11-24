@@ -1,12 +1,23 @@
 package test.abc;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -26,10 +37,11 @@ public class TakeDrinkPicture extends Activity implements OnClickListener {
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
 	private static final int CROP_FROM_CAMERA = 2;
-
 	private Uri mImageCaptureUri;
 	private ImageView mPhotoImageView;
 	private Button mButton;
+	
+	private File file;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -59,13 +71,10 @@ public class TakeDrinkPicture extends Activity implements OnClickListener {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 		// 임시로 사용할 파일의 경로를 생성
-		Log.d("epic", "@@");
 		String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-		Log.d("epic", url);
 		mImageCaptureUri = Uri.fromFile(
 				new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), url));
-		Log.d("epic", mImageCaptureUri.toString());
-
+	
 		intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
 		// 특정기기에서 사진을 저장못하는 문제가 있어 다음을 주석처리 합니다.
 		//intent.putExtra("return-data", true);
@@ -106,12 +115,16 @@ public class TakeDrinkPicture extends Activity implements OnClickListener {
 				mPhotoImageView.setImageBitmap(photo);
 			}
 
+			Log.d("epic", "1!!");
 			// 임시 파일 삭제
-			File f = new File(mImageCaptureUri.getPath());
-			if(f.exists())
+			file = new File(mImageCaptureUri.getPath());
+			Log.d("epic", "path : " + mImageCaptureUri.getPath());
+			Log.d("epic", "file : " + file.toString());
+			if(file.exists())
 			{
-				//uploadImage(f);
-				f.delete();
+				Log.d("epic", "3!!");
+				uploadImage(file);
+				//file.delete();
 			}
 
 			break;
@@ -123,14 +136,12 @@ public class TakeDrinkPicture extends Activity implements OnClickListener {
 			// 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
 
 			mImageCaptureUri = data.getData();
-			Log.d("epic", mImageCaptureUri.toString());
 		}
 
 		case PICK_FROM_CAMERA:
 		{
 			// 이미지를 가져온 이후의 리사이즈할 이미지 크기를 결정합니다.
 			// 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다.
-
 			Intent intent = new Intent("com.android.camera.action.CROP");
 			intent.setDataAndType(mImageCaptureUri, "image/*");
 
@@ -186,16 +197,47 @@ public class TakeDrinkPicture extends Activity implements OnClickListener {
 	}
 
 	private void uploadImage(File imageFile) {
+		Log.d("epic", "upload!!");
+		new HttpClient().execute(mImageCaptureUri);
+		
+	}
+	
+	public class HttpClient extends AsyncTask<Uri, Void, Void> {
 
-		try {
-			FileInputStream fileInputStream = new FileInputStream(imageFile);
-			URL url = new URL("");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		@Override
+		protected Void doInBackground(Uri... params) {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost("http://epicshakerprj.appspot.com/uploadimage/");
+
+			try {
+				MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+				mpEntity.addPart("id", new StringBody("4817033455730688"));
+				mpEntity.addPart("img", new FileBody(file, "image/jpeg"));
+				httppost.setEntity(mpEntity);
+				HttpResponse response;
+				Log.d("epic", "before execute!!");
+				response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				String responseText = EntityUtils.toString(entity);
+				//file.delete();
+				Log.d("epic", response.getStatusLine().toString());
+				Log.d("epic", responseText);
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		protected void onPostExecute(Long unused) {
+			/*
+			progressDialog.dismiss();
+
+			((Runnable) ctx ).run();
+
+			super.onPostExecute(unused);
+			*/
 		}
 
 	}
