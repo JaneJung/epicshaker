@@ -34,39 +34,37 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button1"
-        style="@style/ButtonStyle"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/buttonstyle"
-        android:text="제작 완료" />
-
-    <TextView
-        android:id="@+id/TextView01"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="19dp"
-        android:text="을(를) 따라주세요" />
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/TextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/layout1"
-        android:text="Rum" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="Button" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout1"
+        android:layout_centerHorizontal="true"
+        android:text="Rum" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="을(를) 따라주세요" />
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonStyle"
+        android:layout_below="@+id/TextView01"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonstyle"
+        android:text="제작 완료" />
 
 </RelativeLayout>

@@ -2,78 +2,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background2"
     tools:context=".PreMakePage" >
 
     <TextView
         android:id="@+id/textView1"
+        style="@style/TitleFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
-        style="@style/TitleFont"
         android:text="제작 선행"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/TextView01"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="64dp"
-            android:background="#FFFFFF"
-            android:ems="10"
-            android:text="\n" >
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TextView01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:lines="1"
+        android:singleLine="true"
+        android:text="\n" >
 
-            <requestFocus />
-        </EditText>
-        
-        <TextView
-            android:id="@+id/TextView01"
-            style="@style/TextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="54dp"
-            android:text="컵 용량(ml)"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <requestFocus />
+    </EditText>
 
-        <TextView
-            android:id="@+id/TextView01"
-            style="@style/TextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="174dp"
-            android:text="컵 무게(ml)"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="컵 용량(ml)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <TextView
-            android:id="@+id/textView3"
-            style="@style/TextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/TextView01"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="174dp"
+        android:text="컵 무게(ml)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Button
-            android:id="@+id/button1"
-            style="@style/ButtonStyle"
-            android:layout_below="@+id/textView3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/buttonstyle"
-            android:text="확인 완료" />
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonStyle"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/buttonstyle"
+        android:text="확인 완료" />
 
 </RelativeLayout>
