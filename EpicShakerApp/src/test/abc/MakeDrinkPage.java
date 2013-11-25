@@ -395,7 +395,7 @@ public class MakeDrinkPage extends Activity {
     	        
     	    	nomalize(parseInt);
      			if(global_cnt==10){
-     				calculateWaterLevel(Math.abs(curWeight-final_print)/5);
+     				calculateWaterLevel(Math.abs(curWeight-final_print)/2);
      				global_cnt=0;
      			}
      			temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
