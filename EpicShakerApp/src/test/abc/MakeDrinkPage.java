@@ -56,6 +56,7 @@ public class MakeDrinkPage extends Activity {
 	int waterColor=0;
 	int global_cnt=0;
 	int final_print=0;
+	int cupCapacity = 0;
 	TextView matView;
 	DrawView drawView;
 	private static UsbSerialDriver sDriver = null;
@@ -159,9 +160,9 @@ public class MakeDrinkPage extends Activity {
 	
 	private void setColor() {
 		colorArr = new int[4];
-		colorArr[0] = Color.YELLOW;
+		colorArr[0] = Color.RED;
 		colorArr[1] = Color.GREEN;
-		colorArr[2] = Color.RED;
+		colorArr[2] = Color.YELLOW;
 		colorArr[3] = Color.MAGENTA;
 	}
 	
@@ -395,10 +396,10 @@ public class MakeDrinkPage extends Activity {
     	        
     	    	nomalize(parseInt);
      			if(global_cnt==10){
-     				calculateWaterLevel(Math.abs(curWeight-final_print)/2);
+     				calculateWaterLevel(Math.abs((curWeight-final_print)/5*4));
      				global_cnt=0;
      			}
-     			temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
+     			temp.setText(Integer.toString(Math.abs((curWeight-final_print)/10)));
      			//temp.setText(Integer.toString(Math.abs(curWeight-final_print)*2/5));
     	    	
     	    	
